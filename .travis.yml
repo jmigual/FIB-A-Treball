@@ -1,0 +1,21 @@
+install: make get-deps
+sudo: false
+language: cpp
+
+compiler:
+  - clang
+  - gcc 
+
+os:
+  - linux
+  - osx
+
+before_install:
+  - cd Code
+  - echo $LANG
+  - echo $LC_ALL
+
+branches:
+  only: master
+
+script: make
