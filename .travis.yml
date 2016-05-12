@@ -17,5 +17,6 @@ before_install:
   - cd Code
   - echo $LANG
   - echo $LC_ALL
+  - export CXX="g++-4.8"
 
 install: make -j2
