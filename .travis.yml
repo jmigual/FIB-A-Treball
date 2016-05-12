@@ -8,11 +8,11 @@ os: linux
 addons:
   apt:
     packages:
-      - g++-5
+      - g++-4.8
 
 before_install:
   - cd Code
   - echo $LANG
   - echo $LC_ALL
 
-script: make
+install: make -j2
