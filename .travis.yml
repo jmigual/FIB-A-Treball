@@ -1,21 +1,22 @@
-install: make get-deps
 sudo: false
 language: cpp
 
-compiler:
-  - clang
-  - gcc 
+compiler: gcc 
 
-os:
-  - linux
-  - osx
+os: linux
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+      - gcc-4.8
 
 before_install:
   - cd Code
   - echo $LANG
   - echo $LC_ALL
+  - export CXX="g++-4.8"
 
-branches:
-  only: master
-
-script: make
+script: make -j2
