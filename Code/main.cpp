@@ -6,5 +6,7 @@ int main()
 {
     VVC caca;
     algorithm(caca, caca);
+    
+    // He afegit un comentari
 }
 
