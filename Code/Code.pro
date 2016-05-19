@@ -9,3 +9,6 @@ INCLUDEPATH += .
 # Input
 HEADERS += typedefs.h
 SOURCES += main.cpp Algorithm1/algorithm1.cpp
+
+DISTFILES += \
+    uncrustify.cfg
