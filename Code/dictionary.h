@@ -16,9 +16,9 @@ public:
 
     virtual void reset() = 0;
 
-    virtual void stepForwards(char c) = 0;
+    virtual bool stepForwards(char c) = 0;
     
-    virtual void stepBackwards() = 0;
+    virtual bool stepBackwards() = 0;
 };
 
 #endif // DICTIONARY_H

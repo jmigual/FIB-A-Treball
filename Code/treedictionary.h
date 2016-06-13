@@ -20,10 +20,14 @@ public:
     bool contains(const string &element, uint index);
 
     TreeDictionaryNode *getNode(char c);
+    
+    inline TreeDictionaryNode *parent() { return m_pParent; }
 
 private:
 
     unordered_map<char, TreeDictionaryNode *> m_nodes;
+    
+    TreeDictionaryNode* m_pParent;
 };
 
 class TreeDictionary : public Dictionary
@@ -48,17 +52,20 @@ public:
         return m_pRootNode->getNode(c);
     }
     
-    void reset() {}
+    inline void reset() { m_pStepNode = m_pRootNode; }
     
-    void stepBackwards() {}
+    bool stepBackwards();
     
-    void stepForwards(char) {}
+    bool stepForwards(char c);
     
     
 
 private:
 
     TreeDictionaryNode *m_pRootNode;
+    
+    TreeDictionaryNode *m_pStepNode;
+    
 };
 
 #endif // TREEDICTIONARY_H

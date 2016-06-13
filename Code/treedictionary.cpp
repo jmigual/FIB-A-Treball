@@ -1,5 +1,10 @@
 #include "treedictionary.h"
 
+TreeDictionaryNode::TreeDictionaryNode(TreeDictionaryNode *pParent)
+        : m_pParent(pParent) {
+
+}
+
 TreeDictionaryNode::~TreeDictionaryNode() {
     for (auto it : m_nodes) {
         delete it.second;
@@ -13,7 +18,7 @@ void TreeDictionaryNode::insertElement(const string &element, uint index) {
         // Insert the element
         pair<char, TreeDictionaryNode *> ins;
         ins.first = element[index];
-        ins.second = new TreeDictionaryNode;
+        ins.second = new TreeDictionaryNode(this);
         pair<ucTit, bool> p = m_nodes.insert(ins);
         it = p.first;
     }
@@ -38,14 +43,26 @@ TreeDictionaryNode *TreeDictionaryNode::getNode(char c) {
     return it->second;
 }
 
-
-
 TreeDictionary::TreeDictionary()
         : Dictionary(),
-          m_pRootNode(new TreeDictionaryNode) {
+          m_pRootNode(new TreeDictionaryNode(nullptr)),
+          m_pStepNode(m_pRootNode) {
 
 }
 
 TreeDictionary::~TreeDictionary() {
     delete m_pRootNode;
+}
+
+bool TreeDictionary::stepBackwards() {
+    if (m_pStepNode->parent() == nullptr) return false;
+    m_pStepNode = m_pStepNode->parent();
+    return true;
+}
+
+bool TreeDictionary::stepForwards(char c) {
+    TreeDictionaryNode *pNode = m_pStepNode->getNode(c);
+    if (pNode == nullptr) return false;
+    m_pStepNode = pNode;
+    return true;
 }
