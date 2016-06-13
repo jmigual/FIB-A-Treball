@@ -22,8 +22,8 @@ public:
     /**
      * @brief Check if the element is in the dictionary
      * @param elem Element to be checked
-     * @return <em>true</em> if the element is in the dictionary
-     * otherwise returns <em>false</em>
+     * @return <b>true</b> if the element is in the dictionary
+     * otherwise returns <b>false</b>
      */
     virtual bool contains(const string &elem) = 0;
     
@@ -36,16 +36,16 @@ public:
      * @brief Add one char in the dictionary incremental search and
      * checks if the current generated word is in the dictionary
      * @param c Character added to check if the formed word is in the dictionary
-     * @return <em>true</em> if the current generated sequence is in the 
-     * dictionary, otherwise returns <em>false</em>
+     * @return <b>true</b> if the current generated sequence is in the 
+     * dictionary, otherwise returns <b>false</b>
      */
     virtual bool stepForwards(char c) = 0;
     
     /**
      * @brief Remove the last character in the dictionary incremental search
      * and check if it is possible to go backwards
-     * @return <em>true</em> if it is possible to go backwards in the current 
-     * state, otherwise returns <em>false</em>
+     * @return <b>true</b> if it is possible to go backwards in the current 
+     * state, otherwise returns <b>false</b>
      */
     virtual bool stepBackwards() = 0;
 };
