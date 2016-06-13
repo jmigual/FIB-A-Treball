@@ -11,7 +11,8 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     treedictionary.cpp \
-    dictionary.cpp
+    dictionary.cpp \
+    hashdictionary.cpp
 
 DISTFILES += \
     uncrustify.cfg \
@@ -20,4 +21,5 @@ DISTFILES += \
 
 HEADERS += \
     treedictionary.h \
-    dictionary.h
+    dictionary.h \
+    hashdictionary.h
