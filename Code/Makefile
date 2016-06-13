@@ -1,8 +1,9 @@
 
 DIRS 	= $(wildcard */)
-FILES 	= $(foreach dir, $(DIRS), $(wildcard $(dir)*.cpp))
-OBJS 	= $(foreach file, $(FILES), $(basename $(file)).o) main.o
-EXECS 	= $(foreach dir, $(DIRS), $(subst /,,$(dir)))
+# $(foreach dir, $(DIRS), $(wildcard $(dir)*.cpp))
+FILES 	= $(wildcard *.cpp) 
+OBJS 	= $(foreach file, $(FILES), $(basename $(file)).o)
+EXEC    = SuperSopa.exe
 
 # Config
 OPTIMIZE = 2 # Optimization level (0 to 3)
@@ -26,16 +27,14 @@ LDFLAGS  = -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE))
 
 .PHONY: all
 
-all: $(EXECS)
-
-$(EXECS): main.o $(filter $@%, $(OBJS))
-	$(CXX) $(LDFLAGS) main.o $(filter $@%, $(OBJS)) -o $@/$@.exe
+all: $(OBJS)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $(EXEC)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 
-	
+
 clean:
-	-rm $(OBJS) $(foreach dir, $(DIRS), $(dir)*.exe)
+	-rm $(OBJS) SuperSopa.exe
 
 Makefile.deps: $(FILES)
 	$(CXX) $(CXXFLAGS) -c -MM $(FILES) > Makefile.deps
