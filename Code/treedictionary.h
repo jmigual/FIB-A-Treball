@@ -13,6 +13,7 @@ class TreeDictionaryNode
 
 public:
 
+    TreeDictionaryNode(TreeDictionaryNode *pParent);
     ~TreeDictionaryNode();
 
     void insertElement(const string &element, uint index);
