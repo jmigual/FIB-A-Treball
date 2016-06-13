@@ -10,15 +10,15 @@ public:
     
     virtual ~Dictionary() {}
 
-    virtual void insertElement(const string &);
+    virtual void insertElement(const string &) = 0;
 
-    virtual bool contains(const string &);
+    virtual bool contains(const string &) = 0;
 
-    virtual void reset();
+    virtual void reset() = 0;
 
-    virtual void stepForwards(char c);
+    virtual void stepForwards(char c) = 0;
     
-    virtual void stepBackwards();
+    virtual void stepBackwards() = 0;
 };
 
 #endif // DICTIONARY_H

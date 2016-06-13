@@ -26,7 +26,8 @@ vector<string> getDictonary() {
 
 void generateDictionary() {
     string fileName;
-    uint min, max, seed, words;
+    uint min, max, words;
+    int seed;
     cout << "File name for the dictionary: ";
     cin >> fileName;
     cout << "How many words do you want? ";
