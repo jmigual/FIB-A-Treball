@@ -9,10 +9,6 @@ using namespace std;
 class Dictionary
 {
 public:
-    
-    /// @brief Destructor
-    virtual ~Dictionary() {}
-
     /**
      * @brief Insert the element into the dictionary
      * @param elem Element to be inserted
