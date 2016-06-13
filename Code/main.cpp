@@ -17,17 +17,20 @@
 
 #include "dictionary.h"
 #include "treedictionary.h"
+#include "hashdictionary.h"
 
 using namespace std;
 
-vector<string> getDictonary() {
-    cout << "What dictoinary do you want to open? ";
+vector<string> getWords() {
+    cout << "What words file do you want to open? ";
     string fileName;
     cin >> fileName;
     
     ifstream file(fileName);
+    if (!file.good()) return vector<string>();
+    
     int n;
-    cin >> n;
+    file >> n;
     vector<string> dictionary(n);
     for (string &s:  dictionary) file >> s;
     return dictionary;
@@ -37,7 +40,7 @@ void generateDictionary() {
     string fileName;
     uint min, max, words;
     int seed;
-    cout << "File name for the dictionary: ";
+    cout << "File name for the words file: ";
     cin >> fileName;
     cout << "How many words do you want? ";
     cin >> words;
@@ -70,7 +73,7 @@ void generateDictionary() {
     }
 }
 
-void solveProblem() {
+shared_ptr<Dictionary> getDictionary() {
     cout << "What type of dictionary do you want?" << endl
          << "1) Tree dictionary" << endl
          << "2) Hash dictionary" << endl;
@@ -78,12 +81,26 @@ void solveProblem() {
     int option;
     cin >> option;
     
+    // Shared pointer for better security
     shared_ptr<Dictionary> d;
     switch(option) {
         case 1:
             d = make_shared<TreeDictionary>();
             break;
+        case 2:
+            d = make_shared<HashDictionary>();
     }
+    return d;
+}
+
+void solveProblem() {
+    shared_ptr<Dictionary> d = getDictionary();
+    
+    vector<string> dict = getWords();
+    for (string s : dict) {
+        d->insertElement(s);
+    }
+    
 }
 
 int main()
