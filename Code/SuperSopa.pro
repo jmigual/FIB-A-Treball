@@ -5,10 +5,14 @@
 TEMPLATE = app
 TARGET = Code
 INCLUDEPATH += .
+CONFIG += c++11
 
 # Input
-HEADERS += typedefs.h
-SOURCES += main.cpp Algorithm1/algorithm1.cpp
+
+SOURCES += main.cpp
+QMAKE_CXXFLAGS += -std=c++11
 
 DISTFILES += \
-    uncrustify.cfg
+    uncrustify.cfg \
+    Makefile \
+    .config
