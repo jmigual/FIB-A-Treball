@@ -9,13 +9,13 @@ class HashDictionary : public Dictionary
 public:
     HashDictionary();
 
-    void insertElement(const string &elem);
+    void insertElement(const string &);
 
-    bool contains(const string &elem);
+    bool contains(const string &);
 
     void reset();
 
-    bool stepForwards(char c);
+    bool stepForwards(char);
 
     bool stepBackwards();
 };

@@ -9,10 +9,7 @@ CONFIG += c++11
 
 # Input
 
-SOURCES += main.cpp \
-    treedictionary.cpp \
-    dictionary.cpp \
-    hashdictionary.cpp
+
 
 DISTFILES += \
     uncrustify.cfg \
@@ -20,6 +17,14 @@ DISTFILES += \
     .config
 
 HEADERS += \
-    treedictionary.h \
-    dictionary.h \
-    hashdictionary.h
+    dictionaries/dictionary.h \
+    dictionaries/hashdictionary.h \
+    dictionaries/treedictionary.h \
+    solvers/solver.h
+
+SOURCES += \
+    dictionaries/dictionary.cpp \
+    dictionaries/hashdictionary.cpp \
+    dictionaries/treedictionary.cpp \
+    solvers/solver.cpp \
+    main.cpp

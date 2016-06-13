@@ -1,7 +1,4 @@
-
-DIRS 	= $(wildcard */)
-# $(foreach dir, $(DIRS), $(wildcard $(dir)*.cpp))
-FILES 	= $(wildcard *.cpp) 
+FILES 	= $(wildcard *.cpp) $(wildcard */*.cpp)
 OBJS 	= $(foreach file, $(FILES), $(basename $(file)).o)
 EXEC    = SuperSopa.exe
 
@@ -16,13 +13,13 @@ ifeq ($(strip $(PROFILE)),1)
 	PROFILEFLAGS=-pg
 endif
 ifeq ($(strip $(DEBUG)),1)
-	DEBUGFLAGS=-DDEBUG -g -rdynamic
+	DEBUGFLAGS=-DDEBUG -g
 endif
 ifeq ($(strip $(32BITS)),1)
 	ARCHFLAGS=-m32 -L/usr/lib32
 endif
 
-CXXFLAGS = -Wall -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE)) -Wextra
+CXXFLAGS = -Wall -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE)) -Wextra -Wall
 LDFLAGS  = -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE))
 
 .PHONY: all

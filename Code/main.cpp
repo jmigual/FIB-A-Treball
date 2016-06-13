@@ -15,9 +15,9 @@
 #include <fstream>
 #include <memory>
 
-#include "dictionary.h"
-#include "treedictionary.h"
-#include "hashdictionary.h"
+#include "dictionaries/dictionary.h"
+#include "dictionaries/treedictionary.h"
+#include "dictionaries/hashdictionary.h"
 
 using namespace std;
 
