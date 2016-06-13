@@ -4,6 +4,11 @@
 #include <random>
 #include <ctime>
 #include <fstream>
+#include <memory>
+
+#include "dictionary.h"
+#include "treedictionary.h"
+
 using namespace std;
 
 vector<string> getDictonary() {
@@ -21,7 +26,8 @@ vector<string> getDictonary() {
 
 void generateDictionary() {
     string fileName;
-    uint min, max, seed, words;
+    uint min, max, words;
+    int seed;
     cout << "File name for the dictionary: ";
     cin >> fileName;
     cout << "How many words do you want? ";
@@ -56,7 +62,19 @@ void generateDictionary() {
 }
 
 void solveProblem() {
+    cout << "What type of dictionary do you want?" << endl
+         << "1) Tree dictionary" << endl
+         << "2) Hash dictionary" << endl;
     
+    int option;
+    cin >> option;
+    
+    shared_ptr<Dictionary> d;
+    switch(option) {
+        case 1:
+            d = make_shared<TreeDictionary>();
+            break;
+    }
 }
 
 int main()

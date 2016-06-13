@@ -22,7 +22,7 @@ ifeq ($(strip $(32BITS)),1)
 	ARCHFLAGS=-m32 -L/usr/lib32
 endif
 
-CXXFLAGS = -Wall -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE)) #-Wextra
+CXXFLAGS = -Wall -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE)) -Wextra
 LDFLAGS  = -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE))
 
 .PHONY: all
@@ -34,7 +34,7 @@ all: $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 clean:
-	-rm $(OBJS) SuperSopa.exe
+	-rm $(OBJS) SuperSopa.exe Makefile.deps
 
 Makefile.deps: $(FILES)
 	$(CXX) $(CXXFLAGS) -c -MM $(FILES) > Makefile.deps

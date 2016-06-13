@@ -9,10 +9,15 @@ CONFIG += c++11
 
 # Input
 
-SOURCES += main.cpp
-QMAKE_CXXFLAGS += -std=c++11
+SOURCES += main.cpp \
+    treedictionary.cpp \
+    dictionary.cpp
 
 DISTFILES += \
     uncrustify.cfg \
     Makefile \
     .config
+
+HEADERS += \
+    treedictionary.h \
+    dictionary.h
