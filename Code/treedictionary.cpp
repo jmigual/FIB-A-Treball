@@ -41,6 +41,11 @@ TreeDictionaryNode *TreeDictionaryNode::getNode(char c) {
 
 
 TreeDictionary::TreeDictionary()
-        : m_rootNode(new TreeDictionaryNode) {
+        : Dictionary(),
+          m_pRootNode(new TreeDictionaryNode) {
 
+}
+
+TreeDictionary::~TreeDictionary() {
+    delete m_pRootNode;
 }

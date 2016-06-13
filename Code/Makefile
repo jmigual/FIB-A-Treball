@@ -34,7 +34,7 @@ all: $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 clean:
-	-rm $(OBJS) SuperSopa.exe
+	-rm $(OBJS) SuperSopa.exe Makefile.deps
 
 Makefile.deps: $(FILES)
 	$(CXX) $(CXXFLAGS) -c -MM $(FILES) > Makefile.deps

@@ -10,7 +10,8 @@ CONFIG += c++11
 # Input
 
 SOURCES += main.cpp \
-    treedictionary.cpp
+    treedictionary.cpp \
+    dictionary.cpp
 
 DISTFILES += \
     uncrustify.cfg \
@@ -18,4 +19,5 @@ DISTFILES += \
     .config
 
 HEADERS += \
-    treedictionary.h
+    treedictionary.h \
+    dictionary.h
