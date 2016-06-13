@@ -1,3 +1,12 @@
+/// @file main.cpp
+/// @brief Contains the main code
+/// @mainpage Super Sopa Solver
+/// In this project we create a resolution program for the SuperSopa
+/// problem invented by the Algoritmia teachers.
+/// 
+/// We use two interfaces to handle all the solver methods:
+/// <ul>
+/// <li>Dictionary interface for the dictionaries</li>
 #include <iostream>
 #include <vector>
 #include <string>

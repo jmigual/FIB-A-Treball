@@ -12,12 +12,32 @@ class TreeDictionaryNode
     typedef unordered_map<char, TreeDictionaryNode *>::iterator ucTit;
 
 public:
-
+    /**
+     * @brief TreeDictionaryNode constructor
+     * @param pParent Parent Node
+     */
     TreeDictionaryNode(TreeDictionaryNode *pParent);
+
+    /** 
+     * @brief Destructor
+     */
     ~TreeDictionaryNode();
 
+    /**
+     * @brief Inserts the string <b>element</b> into the dictionary
+     * from the selected index.
+     * @param element Element to insert
+     * @param index Index from <b>element</b> to be inserted
+     */
     void insertElement(const string &element, uint index);
 
+    /**
+     * @brief Check if the element is in the node at position index and below
+     * @param element Element to be checked
+     * @param index Index where to check
+     * @return <b>true</b> if the element from index to length is in the node,
+     * otherwise returns <b>false</b>
+     */
     bool contains(const string &element, uint index);
 
     TreeDictionaryNode *getNode(char c);
