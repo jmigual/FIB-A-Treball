@@ -19,7 +19,7 @@ void TreeDictionaryNode::insertElement(const string &element, uint index) {
         pair<char, TreeDictionaryNode *> ins;
         ins.first = element[index];
         ins.second = new TreeDictionaryNode(this);
-        pair<ucTit, bool> p = m_nodes.insert(ins);
+        auto p = m_nodes.insert(ins);
         it = p.first;
     }
 
