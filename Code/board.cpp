@@ -1,8 +1,8 @@
 #include "board.h"
 
 Board::Board(int height, int width)
-        : m_width(width),
-          m_height(height) {
+        : m_cols(width),
+          m_rows(height) {
     if (width >= 0 && height >= 0) {
         m_data = VVC(height, VC(width));
     }
@@ -17,7 +17,7 @@ char Board::getValue(int row, int column) {
 }
 
 ostream& operator<<(ostream &out, const Board &b) {
-    out << b.m_height << " " << b.m_width << endl;
+    out << b.m_rows << " " << b.m_cols << endl;
     for (const VC &V : b.m_data) {
         for (char c : V) out << c;
         out << endl;
@@ -26,9 +26,9 @@ ostream& operator<<(ostream &out, const Board &b) {
 }
 
 istream& operator>>(istream &in, Board &b) {
-    in >> b.m_height >> b.m_width;
+    in >> b.m_rows >> b.m_cols;
     
-    b.m_data = VVC(b.m_height, VC(b.m_width));
+    b.m_data = VVC(b.m_rows, VC(b.m_cols));
     for (VC &V : b.m_data) for (char &c : V) in >> c;
     return in;
 }

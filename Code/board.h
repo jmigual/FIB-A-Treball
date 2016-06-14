@@ -11,15 +11,15 @@ class Board
 {
 public:
     
-    Board(int m_height = -1, int m_width = -1);
+    Board(int m_rows = -1, int m_cols = -1);
     
     void setValue(char value, int row, int column);
     
     char getValue(int row, int column);
     
-    inline int getHeight() { return m_height; }
+    inline int getRows() { return m_rows; }
     
-    inline int getWidth() { return m_width; }
+    inline int getCols() { return m_cols; }
     
     friend ostream& operator<< (ostream &out, const Board &b);
     
@@ -27,8 +27,8 @@ public:
     
     VVC m_data;
     
-    int m_width;
-    int m_height;
+    int m_cols;
+    int m_rows;
 };
 
 #endif // BOARD_H
