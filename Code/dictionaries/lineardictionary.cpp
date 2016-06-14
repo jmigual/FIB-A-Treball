@@ -1,6 +1,8 @@
 #include "lineardictionary.h"
 #include "algorithm"
 
+LinearDictionary::LinearDictionary(){}
+
 void LinearDictionary::insertElement(const string & S){
     m_Dict.push_back(S);
 }
@@ -17,26 +19,29 @@ void LinearDictionary::reset(){
     m_sCurrent.clear();
 }
 
-bool LinearDictionary::stepForwards(char c){
+pair<bool,bool> LinearDictionary::stepForwards(char c){
     string aux = m_sCurrent;
     aux.push_back(c);
+    pair<bool,bool> p;
+
+    p.first = p.second = false;
 
     for (string s : m_Dict) {
         if (aux.size() <= s.size()){
             auto res = mismatch(aux.begin(), aux.end(), s.begin());
             if (res.first == aux.end()) {
                 m_sCurrent.push_back(c);
-                return true;
+                p.first = true;
+                if (res.second == s.end()) p.second = true;
+                return p;
             }
         }
     }
 
-    return false;
+    return p;
 }
 
-bool LinearDictionary::stepBackwards(){
-    if (m_sCurrent.size() == 0) return false;
-    m_sCurrent.pop_back();
-    return true;
+void LinearDictionary::stepBackwards(){
+    if (m_sCurrent.size() == 0) m_sCurrent.pop_back();
 }
 

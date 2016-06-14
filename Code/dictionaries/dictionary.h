@@ -37,7 +37,7 @@ public:
      * @return <b>true</b> if the current generated sequence is in the 
      * dictionary, otherwise returns <b>false</b>
      */
-    virtual bool stepForwards(char c) = 0;
+    virtual pair<bool,bool> stepForwards(char c) = 0;
     
     /**
      * @brief Remove the last character in the dictionary incremental search
@@ -45,7 +45,7 @@ public:
      * @return <b>true</b> if it is possible to go backwards in the current 
      * state, otherwise returns <b>false</b>
      */
-    virtual bool stepBackwards() = 0;
+    virtual void stepBackwards() = 0;
 };
 
 #endif // DICTIONARY_H
