@@ -1,6 +1,7 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 #include <string>
+#include <utility>
 using namespace std;
 
 typedef unsigned int uint;
@@ -34,10 +35,11 @@ public:
      * @brief Add one char in the dictionary incremental search and
      * checks if the current generated word is in the dictionary
      * @param c Character added to check if the formed word is in the dictionary
-     * @return <b>true</b> if the current generated sequence is in the 
-     * dictionary, otherwise returns <b>false</b>
+     * @return Returns a pair with two balues, first is <b>true</b> if the current
+     * element contains a valid leter. Second is <b>true</b> if with this letter 
+     * a word is found.
      */
-    virtual bool stepForwards(char c) = 0;
+    virtual pair<bool,bool> stepForwards(char c) = 0;
     
     /**
      * @brief Remove the last character in the dictionary incremental search
@@ -45,7 +47,7 @@ public:
      * @return <b>true</b> if it is possible to go backwards in the current 
      * state, otherwise returns <b>false</b>
      */
-    virtual bool stepBackwards() = 0;
+    virtual void stepBackwards() = 0;
 };
 
 #endif // DICTIONARY_H

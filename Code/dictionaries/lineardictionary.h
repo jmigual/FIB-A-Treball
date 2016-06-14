@@ -16,9 +16,9 @@ public:
 
     void reset();
 
-    bool stepForwards(char);
+    pair<bool,bool> stepForwards(char);
 
-    bool stepBackwards();
+    void stepBackwards();
 
 private:
     vector<string> m_Dict;

@@ -42,12 +42,16 @@ public:
     TreeDictionaryNode *getNode(char c);
     
     inline TreeDictionaryNode *parent() { return m_pParent; }
+    
+    inline bool isFinal() { return m_isFinal; }
 
 private:
 
     unordered_map<char, TreeDictionaryNode *> m_nodes;
     
     TreeDictionaryNode* m_pParent;
+    
+    bool m_isFinal;
 };
 
 class TreeDictionary : public Dictionary
@@ -74,9 +78,9 @@ public:
     
     inline void reset() { m_pStepNode = m_pRootNode; }
     
-    bool stepBackwards();
+    void stepBackwards();
     
-    bool stepForwards(char c);
+    pair<bool,bool> stepForwards(char c);
     
     
 
