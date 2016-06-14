@@ -56,7 +56,7 @@ void PatronSolver::insertWord() {
     m_foundWords.push_back(s);
 }
 
-bool PatronSolver::validPos(int row, col) {
+bool PatronSolver::validPos(int row, int col) {
     return row >= 0 && col >= 0 && 
             row < m_board.getRows() && col < m_board.getCols();
 }

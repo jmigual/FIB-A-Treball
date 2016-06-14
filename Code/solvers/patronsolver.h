@@ -8,6 +8,10 @@
 #include "solvers/solver.h"
 #include "board.h"
 
+const int POSITIONS = 8;
+constexpr int R[POSITIONS] = { 1, 1,  1,  0, -1, -1, -1, 0 };
+constexpr int C[POSITIONS] = { 1, 0, -1, -1, -1,  0,  1, 1 };
+
 class PatronSolver : public Solver
 {
 public:
@@ -30,7 +34,7 @@ private:
     
     void insertWord();
     
-    bool validPos(int row, col);
+    bool validPos(int row, int col);
     
     shared_ptr<Dictionary> m_pDict;
     
@@ -39,10 +43,6 @@ private:
     list<string> m_foundWords;
     
     list<char> m_find;
-    
-    static const int POSITIONS = 8;
-    constexpr static int R[POSITIONS] = { 1, 1,  1,  0, -1, -1, -1, 0 };
-    constexpr static int C[POSITIONS] = { 1, 0, -1, -1, -1,  0,  1, 1 };
 };
 
 #endif // PATRONSOLVER_H
