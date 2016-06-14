@@ -43,7 +43,7 @@ $(BUILD_FOLDER)%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 clean:
-	-rm $(OBJS) $(BUILD_FOLDER)/SuperSopa.exe Makefile.deps
+	-rm $(OBJS) $(BUILD_FOLDER)SuperSopa.exe Makefile.deps
 
 folders:
 	-$(MKDIR_P) $(FOLDERS)

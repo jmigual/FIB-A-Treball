@@ -21,6 +21,9 @@ HEADERS += \
     dictionaries/hashdictionary.h \
     dictionaries/treedictionary.h \
     solvers/solver.h \
+    typedefs.h \
+    board.h \
+    solvers/patronsolver.h
     dictionaries/lineardictionary.h
 
 SOURCES += \
@@ -29,4 +32,6 @@ SOURCES += \
     dictionaries/treedictionary.cpp \
     solvers/solver.cpp \
     main.cpp \
+    board.cpp \
+    solvers/patronsolver.cpp
     dictionaries/lineardictionary.cpp

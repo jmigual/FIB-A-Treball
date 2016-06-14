@@ -9,7 +9,6 @@ using namespace std;
 
 class TreeDictionaryNode
 {
-    typedef unordered_map<char, TreeDictionaryNode *>::iterator ucTit;
 
 public:
     /**
