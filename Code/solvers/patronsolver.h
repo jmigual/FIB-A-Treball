@@ -2,6 +2,7 @@
 #define PATRONSOLVER_H
 #include <memory>
 #include <vector>
+#include <list>
 
 #include "dictionaries/dictionary.h"
 #include "solvers/solver.h"
@@ -27,11 +28,15 @@ private:
     
     void findRecursive(int row, int column);
     
+    void insertWord();
+    
     shared_ptr<Dictionary> m_pDict;
     
     Board m_board;
     
-    vector<string> m_foundWords;
+    list<string> m_foundWords;
+    
+    list<char> m_find;
 };
 
 #endif // PATRONSOLVER_H

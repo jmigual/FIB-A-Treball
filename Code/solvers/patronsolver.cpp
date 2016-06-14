@@ -37,3 +37,11 @@ void PatronSolver::findRecursive(int row, int column) {
     
 }
 
+void PatronSolver::insertWord() {
+    string s;
+    s.reserve(m_find.size());
+    
+    for (char c : m_find) s.push_back(c);
+    m_foundWords.push_back(s);
+}
+
