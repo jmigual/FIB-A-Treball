@@ -1,10 +1,15 @@
-BUILD_FOLDER = build
+BUILD_FOLDER = build/
+
+ifeq ($(strip $(WINDOWS)), 1)
+	MKDIR_P = mkdir
+	BUILD_FOLDER := $(subst /,\, $(BUILD_FOLDER))
+endif
 
 FILES 	= $(wildcard *.cpp) $(wildcard */*.cpp)
-OBJS 	= $(foreach file, $(FILES), $(BUILD_FOLDER)/$(basename $(file)).o)
+OBJS 	= $(foreach file, $(FILES), $(BUILD_FOLDER)$(basename $(file)).o)
 EXEC    = SuperSopa.exe
-FOLDERS = $(BUILD_FOLDER) $(foreach file, $(FILES), $(BUILD_FOLDER)/$(dir $(file)))
-DEPS 	= $(foreach file, $(FILES), $(BUILD_FOLDER)/$(basename $(file)).d)
+FOLDERS = $(BUILD_FOLDER) $(foreach file, $(FILES), $(BUILD_FOLDER)$(dir $(file)))
+DEPS 	= $(foreach file, $(FILES), $(BUILD_FOLDER)$(basename $(file)).d)
 
 # Config
 OPTIMIZE = 2 # Optimization level (0 to 3)
@@ -25,9 +30,6 @@ endif
 ifeq ($(strip $(32BITS)),1)
 	ARCHFLAGS=-m32 -L/usr/lib32
 endif
-ifeq ($(strip $(WINDOWS)), 1)
-	MKDIR_P = mkdir
-endif
 
 CXXFLAGS = -Wall -Wextra -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE)) -I./
 LDFLAGS  = -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE))
@@ -37,7 +39,7 @@ LDFLAGS  = -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE))
 all: folders $(OBJS)
 	$(CXX) $(LDFLAGS) $(OBJS) -o $(BUILD_FOLDER)/$(EXEC)
 
-$(BUILD_FOLDER)/%.o: %.cpp
+$(BUILD_FOLDER)%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 clean:
