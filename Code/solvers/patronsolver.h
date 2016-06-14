@@ -25,6 +25,8 @@ public:
     
 private:
     
+    void findRecursive(int row, int column);
+    
     shared_ptr<Dictionary> m_pDict;
     
     Board m_board;
