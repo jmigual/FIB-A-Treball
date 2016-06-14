@@ -20,6 +20,7 @@
 #include "dictionaries/dictionary.h"
 #include "dictionaries/treedictionary.h"
 #include "dictionaries/hashdictionary.h"
+#include "dictionaries/lineardictionary.h"
 #include "board.h"
 
 using namespace std;
@@ -128,7 +129,8 @@ void generateBoard() {
 shared_ptr<Dictionary> getDictionary() {
     cout << "What type of dictionary do you want?" << endl
          << "1) Tree dictionary" << endl
-         << "2) Hash dictionary" << endl;
+         << "2) Hash dictionary" << endl
+         << "3) Vector dictionary" << endl;
     
     int option;
     cin >> option;
@@ -141,6 +143,10 @@ shared_ptr<Dictionary> getDictionary() {
             break;
         case 2:
             d = make_shared<HashDictionary>();
+            break;
+        case 3:
+            d = make_shared<LinearDictionary>();
+            break;
     }
     return d;
 }
