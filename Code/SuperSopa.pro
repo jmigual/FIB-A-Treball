@@ -20,11 +20,13 @@ HEADERS += \
     dictionaries/dictionary.h \
     dictionaries/hashdictionary.h \
     dictionaries/treedictionary.h \
-    solvers/solver.h
+    solvers/solver.h \
+    dictionaries/lineardictionary.h
 
 SOURCES += \
     dictionaries/dictionary.cpp \
     dictionaries/hashdictionary.cpp \
     dictionaries/treedictionary.cpp \
     solvers/solver.cpp \
-    main.cpp
+    main.cpp \
+    dictionaries/lineardictionary.cpp
