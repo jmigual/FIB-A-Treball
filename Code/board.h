@@ -15,6 +15,8 @@ public:
     
     void setValue(char value, int row, int column);
     
+    char getValue(int row, int column);
+    
     inline int getHeight() { return m_height; }
     
     inline int getWidth() { return m_width; }
