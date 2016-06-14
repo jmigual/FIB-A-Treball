@@ -20,6 +20,7 @@
 #include "dictionaries/dictionary.h"
 #include "dictionaries/treedictionary.h"
 #include "dictionaries/hashdictionary.h"
+#include "board.h"
 
 using namespace std;
 
@@ -35,22 +36,9 @@ vector<string> getWords() {
     file >> n;
     vector<string> dictionary(n);
     for (string &s:  dictionary) file >> s;
-    return dictionary;
-}
-
-VVC generateBoard() {
-    string fileName;
-    uint w, h;
-    int seed;
-    cout << "File name for the board file: ";
-    cin >> fileName;
-    cout << "Size of the board (width x height): ";
-    cin >> w >> h;
-    cout << "What seed you whant (-1 for current time)? ";
-    cin >> seed;
     
-    // Set seed
-    default_random_engine rEngine(seed < 0 ? time(0) : seed);
+    cout << "Perfect! Loaded " << n << " words" << endl;
+    return dictionary;
 }
 
 void generateWordsList() {
@@ -88,7 +76,54 @@ void generateWordsList() {
         file << endl;
         --words;
     }
+    
+    cout << "Done you can find your words in the " << fileName << " file" << endl;
 }
+
+Board getBoard() {
+    string fileName;
+    cout << "What board do you want to open? ";
+    cin >> fileName;
+    
+    ifstream file(fileName);
+    Board b(-1, -1);
+    if (!file.good()) return b;
+    
+    file >> b;
+    
+    cout << "The loaded board is this:" << endl;
+    cout << b << endl;
+    return b;
+}
+
+void generateBoard() {
+    string fileName;
+    uint w, h;
+    int seed;
+    cout << "File name for the board file: ";
+    cin >> fileName;
+    cout << "Size of the board (width x height): ";
+    cin >> w >> h;
+    cout << "What seed you whant (-1 for current time)? ";
+    cin >> seed;
+    
+    // Set seed
+    default_random_engine rEngine(seed < 0 ? time(0) : seed);
+    uniform_int_distribution<uint> dist('0', '9');
+    
+    Board b(h, w);
+    
+    ofstream file(fileName);
+    for (uint i = 0; i < h; ++i) {
+        for (uint j = 0; j < w; ++j) b.setValue(dist(rEngine), i, j);
+    }
+    file << b;
+    
+    cout << "Done! Your board is this:" << endl;
+    cout << b << endl;
+    cout << "You can find your board in the " << fileName << " file" << endl;
+}
+
 
 shared_ptr<Dictionary> getDictionary() {
     cout << "What type of dictionary do you want?" << endl
@@ -111,9 +146,12 @@ shared_ptr<Dictionary> getDictionary() {
 }
 
 void solveProblem() {
+    vector<string> dict = getWords();
+    Board b = getBoard();
+    if (b.getWidth() < 0) return;
+    
     shared_ptr<Dictionary> d = getDictionary();
     
-    vector<string> dict = getWords();
     for (string s : dict) {
         d->insertElement(s);
     }
@@ -127,8 +165,9 @@ int main()
     while (ask) {
         cout << "What do you want to do?" << endl
              << "0) Exit" << endl
-             << "1) Generate dictionary file" << endl
-             << "2) Call solver" << endl;
+             << "1) Generate words file" << endl
+             << "2) Generate board file" << endl
+             << "3) Call solver" << endl;
         
         uint option;
         cin >> option;
@@ -141,6 +180,9 @@ int main()
                 generateWordsList();
                 break;
             case 2:
+                generateBoard();
+                break;
+            case 3:
                 solveProblem();
                 break;
         }
