@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include <ostream>
-#include "../dictionaries/dictionary.h"
+#include "dictionaries/dictionary.h"
 
 class Solver
 {
