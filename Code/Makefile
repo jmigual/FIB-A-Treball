@@ -51,3 +51,5 @@ folders:
 Makefile.deps: $(FILES)
 	rm Makefile.deps
 	$(CXX) $(CXXFLAGS) -c -MM $(FILES) -MT $(OBJS) > Makefile.deps
+
+-include Makefile.deps

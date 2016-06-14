@@ -68,13 +68,8 @@ pair<bool, bool> TreeDictionary::stepForwards(char c) {
     
     TreeDictionaryNode *pNode = m_pStepNode->getNode(c);
     if (pNode == nullptr) {
-        p.first = false;
-        p.second = false;
-        return p;
+        return make_pair(false, false);
     }
-    
-    p.first = true;
-    p.second = pNode->isFinal();
     m_pStepNode = pNode;
-    return p;
+    return make_pair(true, pNode->isFinal());
 }
