@@ -22,10 +22,12 @@ bool LinearDictionary::stepForwards(char c){
     aux.push_back(c);
 
     for (string s : m_Dict) {
-        auto res = mismatch(aux.begin(), aux.end(), s.begin(), s.end());
-        if (res.first == aux.end()) {
-            m_sCurrent.push_back(c);
-            return true;
+        if (aux.size() <= s.size()){
+            auto res = mismatch(aux.begin(), aux.end(), s.begin());
+            if (res.first == aux.end()) {
+                m_sCurrent.push_back(c);
+                return true;
+            }
         }
     }
 
