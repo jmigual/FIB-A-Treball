@@ -24,6 +24,7 @@ HEADERS += \
     typedefs.h \
     board.h \
     solvers/patronsolver.h
+    dictionaries/lineardictionary.h
 
 SOURCES += \
     dictionaries/dictionary.cpp \
@@ -33,3 +34,4 @@ SOURCES += \
     main.cpp \
     board.cpp \
     solvers/patronsolver.cpp
+    dictionaries/lineardictionary.cpp
