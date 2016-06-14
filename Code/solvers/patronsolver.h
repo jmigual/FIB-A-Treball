@@ -39,8 +39,8 @@ private:
     list<char> m_find;
     
     static const int POSITIONS = 8;
-    static const int X[POSITIONS] = { 1, 1,  1,  0, -1, -1, -1, 0 };
-    static const int Y[POSITIONS] = { 1, 0, -1, -1, -1,  0,  1, 1 };
+    constexpr static int X[POSITIONS] = { 1, 1,  1,  0, -1, -1, -1, 0 };
+    constexpr static int Y[POSITIONS] = { 1, 0, -1, -1, -1,  0,  1, 1 };
 };
 
 #endif // PATRONSOLVER_H
