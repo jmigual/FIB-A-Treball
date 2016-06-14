@@ -99,12 +99,12 @@ Board getBoard() {
 
 void generateBoard() {
     string fileName;
-    uint w, h;
+    uint c, r;
     int seed;
     cout << "File name for the board file: ";
     cin >> fileName;
-    cout << "Size of the board (width x height): ";
-    cin >> w >> h;
+    cout << "Size of the board (rows x cols): ";
+    cin >> r >> c;
     cout << "What seed you whant (-1 for current time)? ";
     cin >> seed;
     
@@ -112,11 +112,11 @@ void generateBoard() {
     default_random_engine rEngine(seed < 0 ? time(0) : seed);
     uniform_int_distribution<uint> dist('0', '9');
     
-    Board b(h, w);
+    Board b(r, c);
     
     ofstream file(fileName);
-    for (uint i = 0; i < h; ++i) {
-        for (uint j = 0; j < w; ++j) b.setValue(dist(rEngine), i, j);
+    for (uint i = 0; i < r; ++i) {
+        for (uint j = 0; j < c; ++j) b.setValue(dist(rEngine), i, j);
     }
     file << b;
     
@@ -154,7 +154,7 @@ shared_ptr<Dictionary> getDictionary() {
 void solveProblem() {
     vector<string> dict = getWords();
     Board b = getBoard();
-    if (b.getWidth() < 0) return;
+    if (b.getCols() < 0) return;
     
     shared_ptr<Dictionary> d = getDictionary();
     
