@@ -21,13 +21,15 @@ public:
     
     void solve();
     
-    
+    void printSolution(std::ostream &out);
     
 private:
     
     shared_ptr<Dictionary> m_pDict;
     
     Board m_board;
+    
+    vector<string> m_foundWords;
 };
 
 #endif // PATRONSOLVER_H

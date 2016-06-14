@@ -17,6 +17,8 @@ void PatronSolver::solve() {
 }
 
 void PatronSolver::printSolution(ostream &out) {
+    out << m_foundWords.size() << " found words:" << endl;
     
+    for (const string &s : m_foundWords) out << s << endl;
 }
 
