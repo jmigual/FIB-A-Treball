@@ -15,6 +15,8 @@
 #include <fstream>
 #include <memory>
 
+#include "typedefs.h"
+
 #include "dictionaries/dictionary.h"
 #include "dictionaries/treedictionary.h"
 #include "dictionaries/hashdictionary.h"
@@ -36,7 +38,22 @@ vector<string> getWords() {
     return dictionary;
 }
 
-void generateDictionary() {
+VVC generateBoard() {
+    string fileName;
+    uint w, h;
+    int seed;
+    cout << "File name for the board file: ";
+    cin >> fileName;
+    cout << "Size of the board (width x height): ";
+    cin >> w >> h;
+    cout << "What seed you whant (-1 for current time)? ";
+    cin >> seed;
+    
+    // Set seed
+    default_random_engine rEngine(seed < 0 ? time(0) : seed);
+}
+
+void generateWordsList() {
     string fileName;
     uint min, max, words;
     int seed;
@@ -121,7 +138,7 @@ int main()
                 ask = false;
                 break;
             case 1:
-                generateDictionary();
+                generateWordsList();
                 break;
             case 2:
                 solveProblem();

@@ -20,7 +20,8 @@ HEADERS += \
     dictionaries/dictionary.h \
     dictionaries/hashdictionary.h \
     dictionaries/treedictionary.h \
-    solvers/solver.h
+    solvers/solver.h \
+    typedefs.h
 
 SOURCES += \
     dictionaries/dictionary.cpp \
