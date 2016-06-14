@@ -1,11 +1,17 @@
+BUILD_FOLDER = build
+
 FILES 	= $(wildcard *.cpp) $(wildcard */*.cpp)
-OBJS 	= $(foreach file, $(FILES), $(basename $(file)).o)
+OBJS 	= $(foreach file, $(FILES), $(BUILD_FOLDER)/$(basename $(file)).o)
 EXEC    = SuperSopa.exe
+FOLDERS = $(BUILD_FOLDER) $(foreach file, $(FILES), $(BUILD_FOLDER)/$(dir $(file)))
+DEPS 	= $(foreach file, $(FILES), $(BUILD_FOLDER)/$(basename $(file)).d)
 
 # Config
 OPTIMIZE = 2 # Optimization level (0 to 3)
 DEBUG    = 1 # Compile for debugging (0 or 1)
 PROFILE  = 0 # Compile for profile (0 or 1)
+
+MKDIR_P = mkdir -p
 
 # Flags
 
@@ -19,21 +25,23 @@ ifeq ($(strip $(32BITS)),1)
 	ARCHFLAGS=-m32 -L/usr/lib32
 endif
 
-CXXFLAGS = -Wall -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE)) -Wextra -Wall
+CXXFLAGS = -Wall -Wextra -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE)) -I./
 LDFLAGS  = -std=c++11 $(PROFILEFLAGS) $(DEBUGFLAGS) -O$(strip $(OPTIMIZE))
 
-.PHONY: all
+.PHONY: all folders
 
-all: $(OBJS)
-	$(CXX) $(LDFLAGS) $(OBJS) -o $(EXEC)
+all: folders $(OBJS)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $(BUILD_FOLDER)/$(EXEC)
 
-%.o: %.cpp
+$(BUILD_FOLDER)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 clean:
-	-rm $(OBJS) SuperSopa.exe Makefile.deps
+	-rm $(OBJS) $(BUILD_FOLDER)/SuperSopa.exe Makefile.deps
+
+folders:
+	$(MKDIR_P) $(FOLDERS)
 
 Makefile.deps: $(FILES)
-	$(CXX) $(CXXFLAGS) -c -MM $(FILES) > Makefile.deps
-
--include Makefile.deps
+	rm Makefile.deps
+	$(CXX) $(CXXFLAGS) -c -MM $(FILES) -MT $(OBJS) > Makefile.deps
