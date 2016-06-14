@@ -3,6 +3,8 @@
 #include <string>
 using namespace std;
 
+typedef unsigned int uint;
+
 /**
  * @brief The Dictionary interface is used in all the dictionaries
  */

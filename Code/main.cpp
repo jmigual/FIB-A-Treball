@@ -59,7 +59,7 @@ void generateDictionary() {
     
     // Create distributions
     normal_distribution<float> dist(avg, stD);
-    uniform_int_distribution<uint> uniformDist('A', 'Z');
+    uniform_int_distribution<uint> uniformDist('0', '9');
     
     ofstream file(fileName);
     file << words << endl;
