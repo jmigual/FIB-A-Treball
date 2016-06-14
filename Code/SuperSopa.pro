@@ -21,11 +21,15 @@ HEADERS += \
     dictionaries/hashdictionary.h \
     dictionaries/treedictionary.h \
     solvers/solver.h \
-    typedefs.h
+    typedefs.h \
+    board.h \
+    solvers/patronsolver.h
 
 SOURCES += \
     dictionaries/dictionary.cpp \
     dictionaries/hashdictionary.cpp \
     dictionaries/treedictionary.cpp \
     solvers/solver.cpp \
-    main.cpp
+    main.cpp \
+    board.cpp \
+    solvers/patronsolver.cpp
