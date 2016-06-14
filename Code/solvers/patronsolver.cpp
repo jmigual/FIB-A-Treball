@@ -33,7 +33,10 @@ void PatronSolver::findRecursive(int row, int column) {
     char c = m_board.getValue(row, column);
     
     pair<bool,bool> p = m_pDict->stepForwards(c);
+    if (! p.first) return;
     
+    // Word found
+    if (p.second) insertWord();
     
 }
 
