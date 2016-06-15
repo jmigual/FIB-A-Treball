@@ -2,7 +2,9 @@
 
 TreeDictionaryNode::TreeDictionaryNode(TreeDictionaryNode *pParent)
         : m_pParent(pParent),
-          m_isFinal(false) {
+          m_isFinal(false),
+          m_count(0),
+          m_data(0) {
 
 }
 
@@ -14,12 +16,15 @@ TreeDictionaryNode::~TreeDictionaryNode() {
 
 void TreeDictionaryNode::insertElement(const string &element, uint index) {
     auto it = m_nodes.find(element[index]);
+    ++m_count;
 
+    // The character is not in the tree
     if (it == m_nodes.end()) {
         // Insert the element
         pair<char, TreeDictionaryNode *> ins;
-        ins.first = element[index];
         ins.second = new TreeDictionaryNode(this);
+        ins.second->m_data = element[index];
+        ins.first = element[index];
         auto p = m_nodes.insert(ins);
         it = p.first;
     }
@@ -47,6 +52,24 @@ TreeDictionaryNode *TreeDictionaryNode::getNode(char c) {
     return it->second;
 }
 
+string TreeDictionaryNode::popWord(string s) {
+    --m_count;
+    // The root node
+    if (this->m_data == 0) return s;
+
+    vector<char> toDelete;
+
+    for (auto it : m_nodes) {
+        if (it.second->m_count <= 0) {
+            delete it.second;
+            toDelete.push_back(it.first);
+        }
+    }
+
+    for (char c : toDelete) m_nodes.erase(m_nodes.find(c));
+    return this->m_pParent->popWord(m_data + s);
+}
+
 TreeDictionary::TreeDictionary()
         : Dictionary(),
           m_pRootNode(new TreeDictionaryNode(nullptr)),
@@ -64,12 +87,16 @@ void TreeDictionary::stepBackwards() {
 }
 
 pair<bool, bool> TreeDictionary::stepForwards(char c) {
-    pair<bool,bool> p;
-    
+    pair<bool, bool> p;
+
     TreeDictionaryNode *pNode = m_pStepNode->getNode(c);
     if (pNode == nullptr) {
         return make_pair(false, false);
     }
     m_pStepNode = pNode;
     return make_pair(true, pNode->isFinal());
+}
+
+string TreeDictionary::popWord() {
+    return m_pStepNode->popWord("");
 }

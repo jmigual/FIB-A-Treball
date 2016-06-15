@@ -96,8 +96,15 @@ Board getBoard() {
 
     file >> b;
 
-    cout << "The loaded board is this:" << endl;
-    cout << b << endl;
+    cout << "Loaded a board with size: " << b.getRows() << " " << b.getCols();
+    cout << " do you want to see it? [Y/N] ";
+    string s;
+    cin >> s;
+    if (s == "Y" || s == "y" || s == "s") {
+        cout << "The loaded board is this:" << endl;
+        cout << b << endl;
+    }
+    
     return b;
 }
 
@@ -124,8 +131,17 @@ void generateBoard() {
     }
     file << b;
 
-    cout << "Done! Your board is this:" << endl;
-    cout << b << endl;
+    cout << "Done! Generated a board of size " << b.getRows() << " ";
+    cout << b.getCols() << " do you want to see it? [Y/N] ";
+    
+    string s;
+    cin >> s;
+    
+    if (s == "Y" || s == "y" || s == "s") {
+        cout << "Your board is this:" << endl;
+        cout << b << endl;
+    }
+    
     cout << "You can find your board in the " << fileName << " file" << endl;
 }
 
@@ -192,8 +208,8 @@ void solveProblem() {
     string fileName;
     cin >> fileName;
     ofstream file(fileName);
-    file << s;
-    cout << s;
+    file << *s << endl;
+    cout << *s;
 }
 
 int main() {

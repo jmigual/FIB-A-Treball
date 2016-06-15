@@ -30,8 +30,6 @@ private:
 
     void findRecursive(int row, int col);
 
-    void insertWord();
-
     bool validPos(int row, int col);
 
     shared_ptr<Dictionary> m_pDict;
@@ -39,8 +37,6 @@ private:
     Board m_board;
 
     set<string> m_foundWords;
-
-    list<char> m_find;
 };
 
 #endif // PATRONSOLVER_H
