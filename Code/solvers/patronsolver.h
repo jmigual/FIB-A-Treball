@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include <list>
-#include <set>
+#include <unordered_set>
 
 #include "dictionaries/dictionary.h"
 #include "solvers/solver.h"
@@ -36,7 +36,7 @@ private:
 
     Board m_board;
 
-    set<string> m_foundWords;
+    unordered_set<string> m_foundWords;
 };
 
 #endif // PATRONSOLVER_H
