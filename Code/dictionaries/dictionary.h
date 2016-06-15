@@ -52,6 +52,8 @@ public:
     virtual string popWord() {
         return "";
     }
+    
+    virtual bool isEmpty();
 };
 
 #endif // DICTIONARY_H
