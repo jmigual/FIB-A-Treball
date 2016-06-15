@@ -47,8 +47,27 @@ bool WordSolver::findDFS(string s, uint spos, int row, int col){
 
     return false;
 }
+/*
+bool WordSolver::findHash(string s, uint value, int row, int col){
+    if (spos == s.size()) return true;
 
+    if (s[spos] == m_board.getValue(row,col)) {
 
+        for (int i = 0; i < POSITIONS; ++i) {
+            int r2 = row + R[i];
+            int c2 = col + C[i];
+
+            if (validPos(r2, c2) and findDFS(s, spos+1, r2, c2)) return true;
+        }
+    }
+
+    return false;
+}
+
+int stringToInt(string s){
+    return s[0] + 10* stringToInt(s.pop_back());
+}
+*/
 bool WordSolver::validPos(int row, int col) {
     return row >= 0 && col >= 0 &&
             row < m_board.getRows() && col < m_board.getCols();
