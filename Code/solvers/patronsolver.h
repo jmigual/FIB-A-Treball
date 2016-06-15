@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include <list>
-#include <set>
+#include <unordered_set>
 
 #include "dictionaries/dictionary.h"
 #include "solvers/solver.h"
@@ -30,17 +30,13 @@ private:
 
     void findRecursive(int row, int col);
 
-    void insertWord();
-
     bool validPos(int row, int col);
 
     shared_ptr<Dictionary> m_pDict;
 
     Board m_board;
 
-    set<string> m_foundWords;
-
-    list<char> m_find;
+    unordered_set<string> m_foundWords;
 };
 
 #endif // PATRONSOLVER_H
