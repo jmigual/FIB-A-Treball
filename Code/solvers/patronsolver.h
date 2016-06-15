@@ -23,7 +23,7 @@ public:
     
     void solve();
     
-    void printSolution(std::ostream &out);
+    std::ostream &printSolution(std::ostream &out) const;
     
 private:
     

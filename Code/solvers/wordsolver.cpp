@@ -25,14 +25,14 @@ void WordSolver::solve(){
     }
 }
 
-void WordSolver::printSolution(std::ostream &out){
+ostream &WordSolver::printSolution(std::ostream &out) const{
     out << m_foundWords.size() << " found words:" << endl;
 
     for (const string &s : m_foundWords) out << s << endl;
+    return out;
 }
 
-
-bool WordSolver::findDFS(string s, uint spos, int row, int col){
+bool WordSolver::findDFS(const string &s, uint spos, int row, int col){
     if (spos == s.size()) return true;
 
     if (s[spos] == m_board.getValue(row,col)) {

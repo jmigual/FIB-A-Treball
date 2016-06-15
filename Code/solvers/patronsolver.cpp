@@ -21,10 +21,11 @@ void PatronSolver::solve() {
     }
 }
 
-void PatronSolver::printSolution(ostream &out) {
+ostream &PatronSolver::printSolution(ostream &out) const {
     out << m_foundWords.size() << " found words:" << endl;
     
     for (const string &s : m_foundWords) out << s << endl;
+    return out;
 }
 
 void PatronSolver::findRecursive(int row, int col) {
