@@ -12,33 +12,34 @@
 class PatronSolver : public Solver
 {
 public:
-    
+
     PatronSolver();
-    
+
     void setDictionary(shared_ptr<Dictionary> dict);
-    
-    void setWords(vector<string>&) {}
-    
+
+    void setWords(vector<string> &) {
+    }
+
     void setBoard(Board &b);
-    
+
     void solve();
-    
+
     std::ostream &printSolution(std::ostream &out) const;
-    
+
 private:
-    
+
     void findRecursive(int row, int col);
-    
+
     void insertWord();
-    
+
     bool validPos(int row, int col);
-    
+
     shared_ptr<Dictionary> m_pDict;
-    
+
     Board m_board;
-    
+
     set<string> m_foundWords;
-    
+
     list<char> m_find;
 };
 

@@ -16,7 +16,7 @@ public:
 
     void setDictionary(shared_ptr<Dictionary>);
 
-    void setWords(vector<string>&);
+    void setWords(vector<string> &);
 
     void setBoard(Board &);
 
