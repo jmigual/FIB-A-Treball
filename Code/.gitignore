@@ -70,5 +70,7 @@ Thumbs.db
 *.dll
 *.exe
 
+build/
+*.board
 *.dict
 gmon.out
