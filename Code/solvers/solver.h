@@ -8,6 +8,11 @@
 #include "board.h"
 #include "typedefs.h"
 
+
+const int POSITIONS = 8;
+constexpr int R[POSITIONS] = { 1, 1,  1,  0, -1, -1, -1, 0 };
+constexpr int C[POSITIONS] = { 1, 0, -1, -1, -1,  0,  1, 1 };
+
 class Solver
 {
 public:

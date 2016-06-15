@@ -3,14 +3,11 @@
 #include <memory>
 #include <vector>
 #include <list>
+#include <set>
 
 #include "dictionaries/dictionary.h"
 #include "solvers/solver.h"
 #include "board.h"
-
-const int POSITIONS = 8;
-constexpr int R[POSITIONS] = { 1, 1,  1,  0, -1, -1, -1, 0 };
-constexpr int C[POSITIONS] = { 1, 0, -1, -1, -1,  0,  1, 1 };
 
 class PatronSolver : public Solver
 {
@@ -40,7 +37,7 @@ private:
     
     Board m_board;
     
-    list<string> m_foundWords;
+    set<string> m_foundWords;
     
     list<char> m_find;
 };

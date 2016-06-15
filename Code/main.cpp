@@ -23,6 +23,10 @@
 #include "dictionaries/lineardictionary.h"
 #include "board.h"
 
+#include "solvers/solver.h"
+#include "solvers/wordsolver.h"
+#include "solvers/patronsolver.h"
+
 using namespace std;
 
 vector<string> getWords() {
@@ -156,12 +160,40 @@ void solveProblem() {
     Board b = getBoard();
     if (b.getCols() < 0) return;
     
-    shared_ptr<Dictionary> d = getDictionary();
-    
-    for (string s : dict) {
-        d->insertElement(s);
+    cout << "What algorithm do you want to use?" << endl
+         << "1) Patron Solver" << endl
+         << "2) Word Solver" << endl;
+
+    int c;
+    cin>>c;
+
+    shared_ptr<Solver> s;
+    shared_ptr<Dictionary> d;
+
+    switch (c){
+        case 1:
+            s = make_shared<PatronSolver>();
+            d = getDictionary();
+            for (string st : dict) {
+                d->insertElement(st);
+            }
+            s->setDictionary(d);
+            break;
+        case 2:
+            s = make_shared<WordSolver>();
+            s->setWords(dict);
+            break;
     }
     
+    s->setBoard(b);
+    s->solve();
+
+    cout<<"File name where you want the result: ";
+    string fileName;
+    cin>>fileName;
+    ofstream file(fileName);
+    s->printSolution(file);
+
 }
 
 int main()

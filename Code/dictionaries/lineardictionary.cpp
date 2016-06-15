@@ -5,6 +5,12 @@ LinearDictionary::LinearDictionary(){}
 
 void LinearDictionary::insertElement(const string & S){
     m_Dict.push_back(S);
+
+    int i = m_Dict.size()-1;
+    while (i>0 and m_Dict[i-1]>S) {
+        swap(m_Dict[i-1],m_Dict[i]);
+        i--;
+    }
 }
 
 bool LinearDictionary::contains(const string & S){
@@ -42,6 +48,6 @@ pair<bool,bool> LinearDictionary::stepForwards(char c){
 }
 
 void LinearDictionary::stepBackwards(){
-    if (m_sCurrent.size() == 0) m_sCurrent.pop_back();
+    if (m_sCurrent.size() > 0) m_sCurrent.pop_back();
 }
 
