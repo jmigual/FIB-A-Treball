@@ -16,7 +16,7 @@ public:
 
     void reset();
 
-    pair<bool,bool> stepForwards(char);
+    pair<bool, bool> stepForwards(char);
 
     void stepBackwards();
 

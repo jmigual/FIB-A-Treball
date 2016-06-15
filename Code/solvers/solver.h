@@ -25,7 +25,9 @@ public:
     
     virtual void solve() = 0;
     
-    virtual void printSolution(std::ostream &out) = 0;
+    virtual std::ostream& printSolution(std::ostream &out) const = 0;
+    
+    friend std::ostream& operator<< (std::ostream &out, const Solver &s);
 };
 
 #endif // SOLVER_H

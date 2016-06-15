@@ -17,7 +17,7 @@ public:
      */
     TreeDictionaryNode(TreeDictionaryNode *pParent);
 
-    /** 
+    /**
      * @brief Destructor
      */
     ~TreeDictionaryNode();
@@ -40,17 +40,21 @@ public:
     bool contains(const string &element, uint index);
 
     TreeDictionaryNode *getNode(char c);
-    
-    inline TreeDictionaryNode *parent() { return m_pParent; }
-    
-    inline bool isFinal() { return m_isFinal; }
+
+    inline TreeDictionaryNode *parent() {
+        return m_pParent;
+    }
+
+    inline bool isFinal() {
+        return m_isFinal;
+    }
 
 private:
 
     unordered_map<char, TreeDictionaryNode *> m_nodes;
-    
-    TreeDictionaryNode* m_pParent;
-    
+
+    TreeDictionaryNode *m_pParent;
+
     bool m_isFinal;
 };
 
@@ -59,7 +63,7 @@ class TreeDictionary : public Dictionary
 public:
 
     TreeDictionary();
-    
+
     ~TreeDictionary();
 
     inline void insertElement(const string &element) {
@@ -75,21 +79,23 @@ public:
     inline TreeDictionaryNode *getNode(char c) {
         return m_pRootNode->getNode(c);
     }
-    
-    inline void reset() { m_pStepNode = m_pRootNode; }
-    
+
+    inline void reset() {
+        m_pStepNode = m_pRootNode;
+    }
+
     void stepBackwards();
-    
-    pair<bool,bool> stepForwards(char c);
-    
-    
+
+    pair<bool, bool> stepForwards(char c);
+
+
 
 private:
 
     TreeDictionaryNode *m_pRootNode;
-    
+
     TreeDictionaryNode *m_pStepNode;
-    
+
 };
 
 #endif // TREEDICTIONARY_H

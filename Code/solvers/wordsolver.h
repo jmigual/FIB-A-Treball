@@ -16,16 +16,16 @@ public:
 
     void setDictionary(shared_ptr<Dictionary>);
 
-    void setWords(vector<string>&);
+    void setWords(vector<string> &);
 
     void setBoard(Board &);
 
     void solve();
 
-    void printSolution(std::ostream &out);
+    ostream &printSolution(std::ostream &out) const;
 
 private:
-    bool findDFS(string s, uint spos, int row, int col);
+    bool findDFS(const string &s, uint spos, int row, int col);
 
     bool validPos(int row, int col);
 
