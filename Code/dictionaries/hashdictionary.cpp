@@ -47,6 +47,6 @@ pair<bool,bool> HashDictionary::stepForwards(char c) {
 }
 
 void HashDictionary::stepBackwards() {
-    if (m_sCurrent.size() == 0) m_sCurrent.pop_back();
+    if (m_sCurrent.size() > 0) m_sCurrent.pop_back();
 }
 

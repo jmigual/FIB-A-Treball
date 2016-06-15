@@ -53,7 +53,7 @@ void PatronSolver::insertWord() {
     s.reserve(m_find.size());
     
     for (char c : m_find) s.push_back(c);
-    m_foundWords.push_back(s);
+    m_foundWords.insert(s);
 }
 
 bool PatronSolver::validPos(int row, int col) {
