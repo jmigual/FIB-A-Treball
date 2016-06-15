@@ -16,11 +16,13 @@ FOLDERS = $(foreach file, $(FILES), $(DEPDIR)$(dir $(file)) $(BUILD_FOLDER)$(dir
 MKDIR_P = mkdir -p
 RM 		= rm -R
 MV 		= mv
+BUILD_DEL = $(BUILD_FOLDER)
 ifeq ($(strip $(WINDOWS)), 1)
-	FOLDERS := $(subst /,\, $(FOLDERS))
-	MKDIR_P := mkdir
-	RM 		:= del
-	MV 		:= move
+	FOLDERS 	:= $(subst /,\, $(FOLDERS))
+	MKDIR_P 	:= mkdir
+	RM 			:= del /S /Q
+	MV 			:= move
+	BUILD_DEL 	:= $(subst /,\, $(BUILD_DEL))
 endif
 $(shell $(MKDIR_P) $(FOLDERS))
 
@@ -49,7 +51,7 @@ $(BUILD_FOLDER)%.o: %.cpp
 	$(CXX) $(DEPFLAGS) $(CXXFLAGS) -c $< -o $@ 
 
 clean:
-	-$(RM) $(BUILD_FOLDER)
+	-$(RM) $(BUILD_DEL)
 
 $(BUILD_FOLDER)%.d: %.cpp
 	$(CXX) $(CXXFLAGS) -c -MM $< -o $@
