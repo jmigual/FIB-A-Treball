@@ -200,13 +200,13 @@ void solveProblem() {
             s->setWords(dict);
             break;
     }
+    cout << "File name where you want the result: ";
+    string fileName;
+    cin >> fileName;
 
     s->setBoard(b);
     s->solve();
 
-    cout << "File name where you want the result: ";
-    string fileName;
-    cin >> fileName;
     ofstream file(fileName);
     file << *s << endl;
     cout << *s;
