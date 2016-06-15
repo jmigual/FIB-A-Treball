@@ -50,7 +50,9 @@ public:
         return m_isFinal;
     }
     
-    string popWord(string s);
+    string popWord(string s, TreeDictionaryNode *&node, int &deleted);   
+    
+    bool isEmpty();
 
 private:
 
@@ -97,11 +99,15 @@ public:
 
     string popWord();
 
+    
+    bool isEmpty();
 private:
 
     TreeDictionaryNode *m_pRootNode;
 
     TreeDictionaryNode *m_pStepNode;
+    
+    int m_deleted;
 
 };
 
