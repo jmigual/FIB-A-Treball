@@ -25,7 +25,7 @@ public:
      * otherwise returns <b>false</b>
      */
     virtual bool contains(const string &elem) = 0;
-    
+
     /**
      * @brief reset Used in incremental search, resets the incremental search
      */
@@ -36,15 +36,15 @@ public:
      * checks if the current generated word is in the dictionary
      * @param c Character added to check if the formed word is in the dictionary
      * @return Returns a pair with two balues, first is <b>true</b> if the current
-     * element contains a valid leter. Second is <b>true</b> if with this letter 
+     * element contains a valid leter. Second is <b>true</b> if with this letter
      * a word is found.
      */
-    virtual pair<bool,bool> stepForwards(char c) = 0;
-    
+    virtual pair<bool, bool> stepForwards(char c) = 0;
+
     /**
      * @brief Remove the last character in the dictionary incremental search
      * and check if it is possible to go backwards
-     * @return <b>true</b> if it is possible to go backwards in the current 
+     * @return <b>true</b> if it is possible to go backwards in the current
      * state, otherwise returns <b>false</b>
      */
     virtual void stepBackwards() = 0;

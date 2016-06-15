@@ -4,12 +4,12 @@ HashDictionary::HashDictionary() {
 
 }
 
-void HashDictionary::insertElement(const string & S) {
+void HashDictionary::insertElement(const string &S) {
     m_Dict.insert(S);
 }
 
-bool HashDictionary::contains(const string & S) {
-    if (m_Dict.find(S) != m_Dict.end()){
+bool HashDictionary::contains(const string &S) {
+    if (m_Dict.find(S) != m_Dict.end()) {
         m_sCurrent = S;
         m_Dict.erase(S);
         return true;
@@ -21,7 +21,7 @@ void HashDictionary::reset() {
     m_sCurrent.clear();
 }
 
-pair<bool,bool> HashDictionary::stepForwards(char c) {
+pair<bool, bool> HashDictionary::stepForwards(char c) {
     string aux = m_sCurrent;
     aux.push_back(c);
     pair<bool, bool> p;
@@ -33,7 +33,7 @@ pair<bool,bool> HashDictionary::stepForwards(char c) {
     p.first = p.second = false;
 
     for (string s : m_Dict) {
-        if (aux.size() <= s.size()){
+        if (aux.size() <= s.size()) {
             auto res = mismatch(aux.begin(), aux.end(), s.begin());
             if (res.first == aux.end()) {
                 p.first = true;
