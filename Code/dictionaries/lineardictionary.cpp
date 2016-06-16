@@ -34,7 +34,10 @@ pair<bool, bool> LinearDictionary::stepForwards(char c) {
     p.first = p.second = false;
 
     auto mapit = m_Dynamic.find(aux);
-    if (mapit != m_Dynamic.end())return mapit->second;
+    if (mapit != m_Dynamic.end()){
+        if ((mapit->second).first) m_sCurrent.push_back(c);
+        return mapit->second;
+    }
 
     for (string s : m_Dict) {
         if (aux.size() <= s.size()) {
