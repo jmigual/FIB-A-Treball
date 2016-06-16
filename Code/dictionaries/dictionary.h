@@ -48,6 +48,12 @@ public:
      * state, otherwise returns <b>false</b>
      */
     virtual void stepBackwards() = 0;
+
+    virtual string popWord() {
+        return "";
+    }
+    
+    virtual bool isEmpty();
 };
 
 #endif // DICTIONARY_H

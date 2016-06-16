@@ -2,6 +2,7 @@
 #define TREEDICTIONARY_H
 #include <unordered_map>
 #include <string>
+#include <vector>
 
 #include "dictionary.h"
 
@@ -48,6 +49,10 @@ public:
     inline bool isFinal() {
         return m_isFinal;
     }
+    
+    string popWord(string s, TreeDictionaryNode *&node, int &deleted);   
+    
+    bool isEmpty();
 
 private:
 
@@ -56,6 +61,10 @@ private:
     TreeDictionaryNode *m_pParent;
 
     bool m_isFinal;
+    
+    int m_count;
+    
+    char m_data;
 };
 
 class TreeDictionary : public Dictionary
@@ -88,13 +97,17 @@ public:
 
     pair<bool, bool> stepForwards(char c);
 
+    string popWord();
 
-
+    
+    bool isEmpty();
 private:
 
     TreeDictionaryNode *m_pRootNode;
 
     TreeDictionaryNode *m_pStepNode;
+    
+    int m_deleted;
 
 };
 
