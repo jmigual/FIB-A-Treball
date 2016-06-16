@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include "dictionary.h"
 
 class LinearDictionary : public Dictionary
@@ -20,9 +21,14 @@ public:
 
     void stepBackwards();
 
+    string popWord();
+
+    bool isEmpty();
+
 private:
     vector<string> m_Dict;
     string m_sCurrent;
+    map<string,pair<bool,bool> > m_Dynamic;
 };
 
 #endif // LINEARDICTIONARY_H

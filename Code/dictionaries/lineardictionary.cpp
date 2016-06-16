@@ -33,6 +33,9 @@ pair<bool, bool> LinearDictionary::stepForwards(char c) {
 
     p.first = p.second = false;
 
+    auto mapit = m_Dynamic.find(aux);
+    if (mapit != m_Dynamic.end())return mapit->second;
+
     for (string s : m_Dict) {
         if (aux.size() <= s.size()) {
             auto res = mismatch(aux.begin(), aux.end(), s.begin());
@@ -40,11 +43,13 @@ pair<bool, bool> LinearDictionary::stepForwards(char c) {
                 m_sCurrent.push_back(c);
                 p.first = true;
                 if (res.second == s.end()) p.second = true;
+                m_Dynamic[aux] = p;
                 return p;
             }
         }
     }
 
+    m_Dynamic[aux] = p;
     return p;
 }
 
@@ -52,3 +57,15 @@ void LinearDictionary::stepBackwards() {
     if (m_sCurrent.size() > 0) m_sCurrent.pop_back();
 }
 
+string LinearDictionary::popWord(){
+    auto aux = find(m_Dict.begin(), m_Dict.end(), m_sCurrent);
+    if (aux != m_Dict.end()) {
+        m_Dict.erase(aux);
+    }
+
+    return m_sCurrent;
+}
+
+bool LinearDictionary::isEmpty(){
+    return m_sCurrent.size() == 0;
+}
