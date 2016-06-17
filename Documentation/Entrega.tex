@@ -1,0 +1,92 @@
+\documentclass{article}
+
+\usepackage[dvipsnames]{xcolor} % Code highlighting color
+\usepackage[catalan]{babel} % Language 
+\usepackage{indentfirst}
+\usepackage{fontspec} 
+\usepackage{fullpage}
+\usepackage[a4paper, margin=2cm]{geometry} % To change the margins
+\usepackage{graphicx} % Insert images
+\usepackage[hidelinks]{hyperref} % Links color
+\usepackage[final]{pdfpages}
+\usepackage{ragged2e}
+\usepackage{wrapfig} %To Text wrap
+\usepackage{listings} % Add code
+\usepackage{verbatim}
+\usepackage{nameref}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{colortbl}
+
+\setlength{\parskip}{0.7em}
+\setlength{\parindent}{0cm}
+\linespread{1.2}
+
+
+\title{
+	\Huge
+	\textbf{SuperSopa} \\ 
+	\scshape Algorísmia
+}
+\author{
+	Marc Asenjo i Ponce de León \and 
+	Joan Marcè i Igual
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\section{Introducció}
+En aquest treball es demana realitzar un programa que solucioni el problema de la \emph{Super Sopa}. Aquest s'assembla força a la sopa de lletres però amb la diferència que es les paraules no han d'estar necessàriament en una fila (vertical, horitzontal o diagonal) sinó que cada lletra de la paraula pot estar a una de les 8 lletres adjacents a aquesta. Així doncs la possibilitat de camins és força gran i és força útil tenir un programa per solucionar aquest problema.
+
+Així doncs es defineixen els següents termes:
+
+\begin{itemize}
+	\item \verb|n| Amplada del tauler
+	\item \verb|m| Alçada del tauler
+	\item \verb|l| Llargada de la paraula més llarga
+	\item \verb|k| Nombre de paraules
+\end{itemize}
+
+\section{Diccionaris}
+S'han plantejat diferent maneres de crear un diccionari per així poder comprovar si una sèrie de caràcters contenen una paraula de les que s'han de buscar. Així doncs, s'ha creat una \verb|interface| \verb|Diccionari| que permet fer diferents implementacions, conté les següents funcions:
+
+\begin{itemize}
+	\item \verb|void insertElement(const string&)| Afegir un element.
+	\item \verb|bool contains(const string&)| Comprovar si un string està al diccionari.
+	\item \verb|void reset()| Reiniciar la cerca.
+	\item \verb|pair<bool,bool> stepForwards(char c)| Avançar un pas a la cerca amb el caràcter \verb|c| i comprovar si hi ha un prefix o una paraula que contingui la cerca actual.
+	\item \verb|void stepBackWards()| Tirar enrere un pas la cerca actual.
+	\item \verb|string popWord()| Obtenir la paraula de la cerca actual i eliminar-la del diccionari.
+	\item \verb|bool isEmpty()| Comprovar si el diccionari està buit.
+\end{itemize}
+	
+\subsection{\texttt{TreeDictionary}}
+Aquest diccionari emmagatzema la informació en forma d'un arbre. Cada node té les seves pròpies dades i una taula de hash que relaciona un caràcter amb un punter a un altre node. D'aquesta manera al anar buscant només cal anar baixant per l'arbre per trobar si una paraula es troba al diccionari.
+
+\section{Algoritmes de solucionat}
+
+Per als algoritmes de solucionat s'ha creat una \verb|interface| \verb|Solver| que han d'implementar totes les classes que es facin per solucionar el problema, d'aquesta manera es poden utilitzar diferents algoritmes sense haver de reescriure el codi. Les funcions bàsiques d'aquesta són:
+
+\begin{itemize}
+	\item \verb|setDictionary(Dictionary*)| Per afegir un diccionari al solucionador.
+	\item \verb|setWords(vector<string>&)| Per afegir les paraules que s'han de buscar.
+	\item \verb|setBoard(Board &)| Per afegir el tauler on buscar les paraules.
+	\item \verb|solve()| Es crida aquesta funció quan es vol solucionar el tauler.
+	\item \verb|printSolution()| Per imprimir la solució un cop s'ha calculat.
+\end{itemize}
+
+Les dues classes que han heretat d'aquesta \verb|interface| han estat \verb|PatronSolver| que busca si un patró de ce\l.les del tauler té una paraula i \verb|WordSolver| que busca si una determinada paraula es troba al tauler.
+
+\subsection{\texttt{PatronSolver}}
+Aquest algoritme busca si una paraula es troba en un en una sèrie de ce\l.les del tauler. Per fer-ho utilitza un diccionari i per cada ce\l.la comprova si conté una paraula del diccionari. El cost d'aquest algoritme és el següent:
+
+\[ k·insercio + n·m·8^l·l·(stepForward + stepBackwards + isEmpty) + k·popWord \]
+
+On $insercio$ és el cost d'inserir un element al diccionari, $stepForward$ és el cos d'avançar un pas al diccionari $stepBackwards$ és el cost de tirar un pas enrere al diccionari, $isEmpty$ és el cost de saber si el diccionari està buit i $popWord$ és el
+cost de d'eliminar una paraula del diccionari.
+
+\end{document}

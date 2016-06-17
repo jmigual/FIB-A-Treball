@@ -2,7 +2,7 @@
 #define HASHDICTIONARY_H
 #include <string>
 #include <unordered_set>
-#include <map>
+#include <unordered_map>
 
 #include "dictionary.h"
 
@@ -28,7 +28,7 @@ public:
 private:
     unordered_set<string> m_dict;
     string m_sCurrent;
-    map<string,pair<bool,bool> > m_dynamic;
+    unordered_map<string,pair<bool,bool> > m_dynamic;
 };
 
 #endif // HASHDICTIONARY_H

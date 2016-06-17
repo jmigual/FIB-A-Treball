@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include <unordered_set>
+#include <ctime>
 
 #include "dictionaries/dictionary.h"
 #include "solvers/solver.h"
@@ -37,6 +38,12 @@ private:
     Board m_board;
 
     unordered_set<string> m_foundWords;
+    
+    uint m_comparisons;
+    uint m_failedComparisons;
+    uint m_checkedCells;
+    
+    std::clock_t m_time;
 };
 
 #endif // PATRONSOLVER_H

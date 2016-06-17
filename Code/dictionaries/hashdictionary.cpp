@@ -38,7 +38,7 @@ pair<bool, bool> HashDictionary::stepForwards(char c) {
         return p;
     }
 
-    for (string s : m_dict) {
+    for (const string &s : m_dict) {
         if (aux.size() <= s.size()) {
             auto res = mismatch(aux.begin(), aux.end(), s.begin());
             if (res.first == aux.end()) {
