@@ -1,8 +1,10 @@
 #include <iostream>
-#include <ctime>
 #include "patronsolver.h"
 
-PatronSolver::PatronSolver() {
+PatronSolver::PatronSolver()
+        : m_comparisons(0),
+          m_failedComparisons(0),
+          m_checkedCells(0) {
 
 }
 
@@ -15,8 +17,9 @@ void PatronSolver::setBoard(Board &b) {
 }
 
 void PatronSolver::solve() {
+    m_time = clock();
     for (int i = 0; i < m_board.getRows(); ++i) {
-        if (i%10 == 0) cerr << "Checking row " << i << " to " << i + 9 << endl;
+        if (i % 10 == 0) cerr << "Checking row " << i << " to " << i + 9 << endl;
         for (int j = 0; j < m_board.getCols(); ++j) {
             m_pDict->reset();
             if (m_pDict->isEmpty()) {
@@ -26,11 +29,19 @@ void PatronSolver::solve() {
             findRecursive(i, j);
         }
     }
+    m_time = clock() - m_time;
 }
 
 ostream &PatronSolver::printSolution(ostream &out) const {
-    out << m_foundWords.size() << " found words:" << endl;
+    out << "Patron Solver" << endl;
+    out << "Found Words       : " << m_foundWords.size() << endl;
+    out << "Comparisons       : " << m_comparisons << endl;
+    out << "Failed comparisons: " << m_failedComparisons << endl;
+    out << "Checked cells     : " << m_checkedCells << endl << endl;
+    out << "Execution ticks   : " << m_time << endl;
+    out << "Execution time    : " << m_time /((float) CLOCKS_PER_SEC) << endl;
 
+    out << "This words have been found:" << endl;
     for (const string &s : m_foundWords) out << s << endl;
     return out;
 }
@@ -38,8 +49,12 @@ ostream &PatronSolver::printSolution(ostream &out) const {
 void PatronSolver::findRecursive(int row, int col) {
     char c = m_board[row][col];
 
+    ++m_comparisons;
     pair<bool, bool> p = m_pDict->stepForwards(c);
-    if (!p.first) return;
+    if (!p.first) {
+        ++m_failedComparisons;
+        return;
+    }
 
     // Word found
     if (p.second) {
@@ -50,6 +65,7 @@ void PatronSolver::findRecursive(int row, int col) {
         int r2 = row + R[i];
         int c2 = col + C[i];
 
+        ++m_checkedCells;
         if (validPos(r2, c2)) findRecursive(r2, c2);
     }
     m_pDict->stepBackwards();

@@ -3,7 +3,8 @@
 #include "solvers/solver.h"
 #include "dictionaries/dictionary.h"
 
-#include <set>
+#include <ctime>
+#include <unordered_set>
 #include <vector>
 #include <memory>
 #include "board.h"
@@ -33,7 +34,13 @@ private:
 
     Board m_board;
 
-    set<string> m_foundWords;
+    unordered_set<string> m_foundWords;
+    
+    uint m_comparisons;
+    uint m_failedComparisons;
+    uint m_checkedCells;
+    
+    std::clock_t m_time;
 };
 
 #endif // WORDSOLVER_H

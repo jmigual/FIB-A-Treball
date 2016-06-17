@@ -39,7 +39,7 @@ pair<bool, bool> LinearDictionary::stepForwards(char c) {
         return mapit->second;
     }
 
-    for (string s : m_Dict) {
+    for (string &s : m_Dict) {
         if (aux.size() <= s.size()) {
             auto res = mismatch(aux.begin(), aux.end(), s.begin());
             if (res.first == aux.end()) {

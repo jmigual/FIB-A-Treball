@@ -1,0 +1,10 @@
+\select@language {catalan}
+\contentsline {section}{\numberline {1}Introducció}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Influències}{3}{subsection.1.1}
+\contentsline {section}{\numberline {2}Principals característiques}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Paradigma}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Compilat o interpretat?}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Comprovació de tipus}{3}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Sistema de pila}{4}{subsection.2.4}
+\contentsline {section}{\numberline {3}Exemples}{4}{section.3}
+\contentsline {section}{\numberline {4}Llenguatges similars}{5}{section.4}
