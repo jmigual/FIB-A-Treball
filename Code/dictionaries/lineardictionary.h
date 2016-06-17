@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include "dictionary.h"
 
 class LinearDictionary : public Dictionary
@@ -28,7 +28,7 @@ public:
 private:
     vector<string> m_Dict;
     string m_sCurrent;
-    map<string,pair<bool,bool> > m_Dynamic;
+    unordered_map<string,pair<bool,bool> > m_Dynamic;
 };
 
 #endif // LINEARDICTIONARY_H
