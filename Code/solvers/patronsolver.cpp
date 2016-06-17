@@ -1,5 +1,6 @@
-#include "patronsolver.h"
 #include <iostream>
+#include <ctime>
+#include "patronsolver.h"
 
 PatronSolver::PatronSolver() {
 
@@ -35,7 +36,7 @@ ostream &PatronSolver::printSolution(ostream &out) const {
 }
 
 void PatronSolver::findRecursive(int row, int col) {
-    char c = m_board.getValue(row, col);
+    char c = m_board[row][col];
 
     pair<bool, bool> p = m_pDict->stepForwards(c);
     if (!p.first) return;

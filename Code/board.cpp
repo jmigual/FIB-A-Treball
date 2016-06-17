@@ -8,14 +8,6 @@ Board::Board(int height, int width)
     }
 }
 
-void Board::setValue(char value, int row, int column) {
-    m_data[row][column] = value;
-}
-
-char Board::getValue(int row, int column) {
-    return m_data[row][column];
-}
-
 ostream& operator<<(ostream &out, const Board &b) {
     out << b.m_rows << " " << b.m_cols << endl;
     for (const VC &V : b.m_data) {

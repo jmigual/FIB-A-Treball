@@ -13,9 +13,13 @@ public:
     
     Board(int m_rows = -1, int m_cols = -1);
     
-    void setValue(char value, int row, int column);
+    inline void setValue(char value, int row, int column) {
+        m_data[row][column] = value;
+    }
     
-    char getValue(int row, int column);
+    inline char getValue(int row, int column) {
+        return m_data[row][column];
+    }
     
     inline int getRows() { return m_rows; }
     
@@ -24,6 +28,10 @@ public:
     friend ostream& operator<< (ostream &out, const Board &b);
     
     friend istream& operator>> (istream &in, Board &b);
+    
+    inline VC& operator[](int i) {
+        return m_data[i];
+    }
     
     VVC m_data;
     
