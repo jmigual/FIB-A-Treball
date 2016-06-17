@@ -17,7 +17,7 @@ public:
 
     void reset();
 
-    pair<bool, bool> stepForwards(char);
+    pair<bool, bool> stepForwards(char c);
 
     void stepBackwards();
 
@@ -26,9 +26,9 @@ public:
     bool isEmpty();
 
 private:
-    unordered_set<string> m_Dict;
+    unordered_set<string> m_dict;
     string m_sCurrent;
-    map<string,pair<bool,bool> > m_Dynamic;
+    map<string,pair<bool,bool> > m_dynamic;
 };
 
 #endif // HASHDICTIONARY_H
