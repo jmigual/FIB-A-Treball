@@ -145,4 +145,22 @@ Per executar les diferents versions dels diccionaris i dels programes per soluci
 
 El programa primer necessita que se li generi un arxiu de paraules i un arxiu de tauler, disposa d'aquesta funcionalitat. Per generar aquests arxius escollir les opcions \verb|1| i \verb|2|.
 
+\section{Tests}
+
+S'han fet diversos tests per cada algoritme en funció de \verb|n| (tamany del tauler quadrat), \verb|k| (nombre de paraules del diccionari) i \verb|l| (longitud màxima de les paraules).
+
+\subsection{\texttt{PatronSearch} amb \texttt{TreeDictionary}}
+
+Amb \verb|l = 30|
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	 & & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{3}{*}{n} 
+	& 100 & 0.21 & 0.5 & 2.02 \\
+	& 200 & 0.34 & 0.85 & 5.51 \\
+	& 2000 & 0.5 & 0 & 16.1 \\
+\end{tabular}
+
 \end{document}

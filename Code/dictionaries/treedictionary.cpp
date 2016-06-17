@@ -86,7 +86,8 @@ bool TreeDictionaryNode::isEmpty() {
 TreeDictionary::TreeDictionary()
         : Dictionary(),
           m_pRootNode(new TreeDictionaryNode(nullptr)),
-          m_pStepNode(m_pRootNode) {
+          m_pStepNode(m_pRootNode),
+          m_deleted(0) {
 
 }
 
@@ -105,13 +106,11 @@ void TreeDictionary::stepBackwards() {
 }
 
 pair<bool, bool> TreeDictionary::stepForwards(char c) {
-    assert(m_pStepNode != nullptr);
     if (m_deleted > 0) return make_pair(false, false);
 
     TreeDictionaryNode *pNode = m_pStepNode->getNode(c);
-    if (pNode == nullptr) {
-        return make_pair(false, false);
-    }
+    if (pNode == nullptr) return make_pair(false, false);
+    
     m_pStepNode = pNode;
     return make_pair(true, pNode->isFinal());
 }
