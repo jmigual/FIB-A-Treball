@@ -84,6 +84,9 @@ Les dues classes que han heretat d'aquesta \verb|interface| han estat \verb|Patr
 \subsection{\texttt{PatronSolver}}
 Aquest algoritme busca si una paraula es troba en un en una sèrie de ce\l.les del tauler. Per fer-ho utilitza un diccionari i per cada ce\l.la comprova si conté una paraula del diccionari. El cost d'aquest algoritme és el següent:
 
-\[  \]
+\[ k·insercio + n·m·8^l·l·(stepForward + stepBackwards + isEmpty) + k·popWord \]
+
+On $insercio$ és el cost d'inserir un element al diccionari, $stepForward$ és el cos d'avançar un pas al diccionari $stepBackwards$ és el cost de tirar un pas enrere al diccionari, $isEmpty$ és el cost de saber si el diccionari està buit i $popWord$ és el
+cost de d'eliminar una paraula del diccionari.
 
 \end{document}
