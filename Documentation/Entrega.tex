@@ -65,7 +65,35 @@ S'han plantejat diferent maneres de crear un diccionari per així poder comprova
 \end{itemize}
 	
 \subsection{\texttt{TreeDictionary}}
-Aquest diccionari emmagatzema la informació en forma d'un arbre. Cada node té les seves pròpies dades i una taula de hash que relaciona un caràcter amb un punter a un altre node. D'aquesta manera al anar buscant només cal anar baixant per l'arbre per trobar si una paraula es troba al diccionari.
+Aquest diccionari emmagatzema la informació en forma d'un arbre. Cada node té les seves pròpies dades i una taula de hash que relaciona un caràcter amb un punter a un altre node. D'aquesta manera al anar buscant només cal anar baixant per l'arbre per trobar si una paraula es troba al diccionari. Els costos de realitzar les operacions són els següents:
+
+\begin{itemize}
+	\item \verb|void insertElement(const string&)| $\theta(l)$
+	\item \verb|pair<bool,bool> stepForwards(char c)| $\theta(1)$
+	\item \verb|void stepBackWards()| $\theta(1)$
+	\item \verb|string popWord()| $\theta(l)$
+	\item \verb|bool isEmpty()| $\theta(1)$
+\end{itemize}
+
+\subsection{\texttt{HashDictionary}}
+
+\begin{itemize}
+	\item \verb|void insertElement(const string&)| $\theta(1)$
+	\item \verb|pair<bool,bool> stepForwards(char c)| $\theta(1 | k·l)$ aquest valor depèn de si l'element buscat estava en el map d'elements ja buscats o no.
+	\item \verb|void stepBackWards()| $\theta(1)$
+	\item \verb|string popWord()| $\theta(1)$
+	\item \verb|bool isEmpty()| $\theta(1)$
+\end{itemize}
+
+\subsection{\texttt{LinearDictionary}}
+
+\begin{itemize}
+	\item \verb|void insertElement(const string&)| $\theta(log k)$
+	\item \verb|pair<bool,bool> stepForwards(char c)| $\theta(1 | k·l)$ aquest valor depèn de si l'element buscat estava en el map d'elements ja buscats o no.
+	\item \verb|void stepBackWards()| $\theta(1)$
+	\item \verb|string popWord()| $\theta(log k)$
+	\item \verb|bool isEmpty()| $\theta(1)$
+\end{itemize}
 
 \section{Algoritmes de solucionat}
 
@@ -88,5 +116,31 @@ Aquest algoritme busca si una paraula es troba en un en una sèrie de ce\l.les d
 
 On $insercio$ és el cost d'inserir un element al diccionari, $stepForward$ és el cos d'avançar un pas al diccionari $stepBackwards$ és el cost de tirar un pas enrere al diccionari, $isEmpty$ és el cost de saber si el diccionari està buit i $popWord$ és el
 cost de d'eliminar una paraula del diccionari.
+
+\subsection{\texttt{WordSolver}}
+
+Amb aquest solucionador assolim l'objectiu d'examinar la possibilitat que una paraula concreta del diccionari sigui al tauler.
+La forma en què funciona exactament és a base de diferents DFS molt restringits. Bàsicament, per cada paraula fa un DFS començant per cada posició diferent del tauler.
+Aquest DFS es crida recursivament en les màxim 8 posicions contigües a la casella actual, podent fer repeticions, però només ho fa si el caràcter (o número) que es troba en la casella actual correspon al que estem observant de la paraula que busquem.
+Per tant, quan un DFS comença, es comprova que el caràcter a la casella sigui igual al primer de l'string, i si es compleix es crida recursivament a 8 (o menys) DFS indicant que s'han de comparar ara amb el segon caràcter de l'string.
+
+El cost d'aquest algoritme seria de $\theta(k·n·m·8^l·l)$ si considerem que es fan tots els DFS possibles de "l" de llargada, però com hem vist l'algoritme només segueix un camí un de cada 10 cops si considerem que els números del tauler són aleatoris.
+Per tant, podem aproximar el cost real a $\theta(k·n·m·l)$.
+
+\section{Compilació i execució}
+
+Per compilar el codi cal anar a la carpeta \verb|Code| i executar la comanda \verb|make| es generarà una carpeta \verb|build| on hi haurà l'executable \verb|SuperSopa.exe|. És necessari tenir un compilador que suporti \verb|c++11| sinó el codi no compilarà.
+
+Per executar les diferents versions dels diccionaris i dels programes per solucionar només cal executar \verb|./SuperSopa.exe| i ja apareixerà un menú per escollir les diferents opcions. 
+
+\begin{lstlisting}[frame=single]
+	What do you want to do?
+	0) Exit
+	1) Generate words file
+	2) Generate board file
+	3) Call solver
+\end{lstlisting}
+
+El programa primer necessita que se li generi un arxiu de paraules i un arxiu de tauler, disposa d'aquesta funcionalitat. Per generar aquests arxius escollir les opcions \verb|1| i \verb|2|.
 
 \end{document}
