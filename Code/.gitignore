@@ -74,3 +74,4 @@ build/
 *.board
 *.dict
 gmon.out
+*.out
