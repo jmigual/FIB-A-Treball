@@ -70,5 +70,5 @@ string LinearDictionary::popWord(){
 }
 
 bool LinearDictionary::isEmpty(){
-    return m_sCurrent.size() == 0;
+    return m_Dict.empty();
 }

@@ -63,5 +63,5 @@ string HashDictionary::popWord(){
 }
 
 bool HashDictionary::isEmpty(){
-    return m_sCurrent.size() == 0;
+    return m_Dict.empty();
 }
