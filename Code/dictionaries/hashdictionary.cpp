@@ -5,11 +5,11 @@ HashDictionary::HashDictionary() {
 }
 
 void HashDictionary::insertElement(const string &S) {
-    m_Dict.insert(S);
+    m_dict.insert(S);
 }
 
 bool HashDictionary::contains(const string &S) {
-    if (m_Dict.find(S) != m_Dict.end()) {
+    if (m_dict.find(S) != m_dict.end()) {
         m_sCurrent = S;
         return true;
     }
@@ -27,8 +27,8 @@ pair<bool, bool> HashDictionary::stepForwards(char c) {
 
     p.first = p.second = false;
 
-    auto mapit = m_Dynamic.find(aux);
-    if (mapit != m_Dynamic.end()){
+    auto mapit = m_dynamic.find(aux);
+    if (mapit != m_dynamic.end()){
         if ((mapit->second).first) m_sCurrent.push_back(c);
         return mapit->second;
     }
@@ -38,18 +38,18 @@ pair<bool, bool> HashDictionary::stepForwards(char c) {
         return p;
     }
 
-    for (string s : m_Dict) {
+    for (string s : m_dict) {
         if (aux.size() <= s.size()) {
             auto res = mismatch(aux.begin(), aux.end(), s.begin());
             if (res.first == aux.end()) {
                 p.first = true;
-                m_Dynamic[aux] = p;
+                m_dynamic[aux] = p;
                 m_sCurrent.push_back(c);
                 return p;
             }
         }
     }
-    m_Dynamic[aux] = p;
+    m_dynamic[aux] = p;
     return p;
 }
 
@@ -58,10 +58,10 @@ void HashDictionary::stepBackwards() {
 }
 
 string HashDictionary::popWord(){
-    m_Dict.erase(m_sCurrent);
+    m_dict.erase(m_sCurrent);
     return m_sCurrent;
 }
 
 bool HashDictionary::isEmpty(){
-    return m_Dict.empty();
+    return m_dict.empty();
 }
