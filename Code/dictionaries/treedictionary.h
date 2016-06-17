@@ -90,6 +90,7 @@ public:
     }
 
     inline void reset() {
+        m_deleted = 0;
         m_pStepNode = m_pRootNode;
     }
 
