@@ -1,4 +1,4 @@
-\documentclass{article}
+﻿\documentclass{article}
 
 \usepackage[dvipsnames]{xcolor} % Code highlighting color
 \usepackage[catalan]{babel} % Language 
@@ -76,6 +76,7 @@ Aquest diccionari emmagatzema la informació en forma d'un arbre. Cada node té 
 \end{itemize}
 
 \subsection{\texttt{HashDictionary}}
+Aquest diccionari es basa en el fàcil i ràpid accés a les paraules, tant per consultar-les com per eliminar-les. Utilitza dues taules de hash: la primera per les paraules del diccionari, i la segona per emmagatzemar els resultats de la funció "stepForwards" que ja s'han calculat, per tal d'evitar càlculs innecessaris. Aquí tenim els costos:
 
 \begin{itemize}
 	\item \verb|void insertElement(const string&)| $\theta(1)$
@@ -86,6 +87,7 @@ Aquest diccionari emmagatzema la informació en forma d'un arbre. Cada node té 
 \end{itemize}
 
 \subsection{\texttt{LinearDictionary}}
+Molt similar al HashDictionary, només que utilitza un vector ordenat per tal de guardar les paraules del diccionari. També utilitza el hash per no repetir càlculs. Els costos d'accés poden ser o lineals o, aprofitant l'ordenació, logarítimics:
 
 \begin{itemize}
 	\item \verb|void insertElement(const string&)| $\theta(log k)$
