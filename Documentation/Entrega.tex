@@ -65,7 +65,37 @@ S'han plantejat diferent maneres de crear un diccionari per així poder comprova
 \end{itemize}
 	
 \subsection{\texttt{TreeDictionary}}
-Aquest diccionari emmagatzema la informació en forma d'un arbre. Cada node té les seves pròpies dades i una taula de hash que relaciona un caràcter amb un punter a un altre node. D'aquesta manera al anar buscant només cal anar baixant per l'arbre per trobar si una paraula es troba al diccionari.
+Aquest diccionari emmagatzema la informació en forma d'un arbre. Cada node té les seves pròpies dades i una taula de hash que relaciona un caràcter amb un punter a un altre node. D'aquesta manera al anar buscant només cal anar baixant per l'arbre per trobar si una paraula es troba al diccionari. Els costos de realitzar les operacions són els següents:
+
+\begin{itemize}
+	\item \verb|void insertElement(const string&)| $\theta(l)$
+	\item \verb|pair<bool,bool> stepForwards(char c)| $\theta(1)$
+	\item \verb|void stepBackWards()| $\theta(1)$
+	\item \verb|string popWord()| $\theta(l)$
+	\item \verb|bool isEmpty()| $\theta(1)$
+\end{itemize}
+
+\subsection{\texttt{HashDictionary}}
+Aquest diccionari es basa en el fàcil i ràpid accés a les paraules, tant per consultar-les com per eliminar-les. Utilitza dues taules de hash: la primera per les paraules del diccionari, i la segona per emmagatzemar els resultats de la funció "stepForwards" que ja s'han calculat, per tal d'evitar càlculs innecessaris. Aquí tenim els costos:
+
+\begin{itemize}
+	\item \verb|void insertElement(const string&)| $\theta(1)$
+	\item \verb|pair<bool,bool> stepForwards(char c)| $\theta(1 | k·l)$ aquest valor depèn de si l'element buscat estava en el map d'elements ja buscats o no.
+	\item \verb|void stepBackWards()| $\theta(1)$
+	\item \verb|string popWord()| $\theta(1)$
+	\item \verb|bool isEmpty()| $\theta(1)$
+\end{itemize}
+
+\subsection{\texttt{LinearDictionary}}
+Molt similar al HashDictionary, només que utilitza un vector ordenat per tal de guardar les paraules del diccionari. També utilitza el hash per no repetir càlculs. Els costos d'accés poden ser o lineals o, aprofitant l'ordenació, logarítimics:
+
+\begin{itemize}
+	\item \verb|void insertElement(const string&)| $\theta(log k)$
+	\item \verb|pair<bool,bool> stepForwards(char c)| $\theta(1 | k·l)$ aquest valor depèn de si l'element buscat estava en el map d'elements ja buscats o no.
+	\item \verb|void stepBackWards()| $\theta(1)$
+	\item \verb|string popWord()| $\theta(log k)$
+	\item \verb|bool isEmpty()| $\theta(1)$
+\end{itemize}
 
 \section{Algoritmes de solucionat}
 
@@ -88,5 +118,143 @@ Aquest algoritme busca si una paraula es troba en un en una sèrie de ce\l.les d
 
 On $insercio$ és el cost d'inserir un element al diccionari, $stepForward$ és el cos d'avançar un pas al diccionari $stepBackwards$ és el cost de tirar un pas enrere al diccionari, $isEmpty$ és el cost de saber si el diccionari està buit i $popWord$ és el
 cost de d'eliminar una paraula del diccionari.
+
+\subsection{\texttt{WordSolver}}
+
+Amb aquest solucionador assolim l'objectiu d'examinar la possibilitat que una paraula concreta del diccionari sigui al tauler.
+La forma en què funciona exactament és a base de diferents DFS molt restringits. Bàsicament, per cada paraula fa un DFS començant per cada posició diferent del tauler.
+Aquest DFS es crida recursivament en les màxim 8 posicions contigües a la casella actual, podent fer repeticions, però només ho fa si el caràcter (o número) que es troba en la casella actual correspon al que estem observant de la paraula que busquem.
+Per tant, quan un DFS comença, es comprova que el caràcter a la casella sigui igual al primer de l'string, i si es compleix es crida recursivament a 8 (o menys) DFS indicant que s'han de comparar ara amb el segon caràcter de l'string.
+
+El cost d'aquest algoritme seria de $\theta(k·n·m·8^l·l)$ si considerem que es fan tots els DFS possibles de "l" de llargada, però com hem vist l'algoritme només segueix un camí un de cada 10 cops si considerem que els números del tauler són aleatoris.
+Per tant, podem aproximar el cost real a $\theta(k·n·m·l)$.
+
+\section{Compilació i execució}
+
+Per compilar el codi cal anar a la carpeta \verb|Code| i executar la comanda \verb|make| es generarà una carpeta \verb|build| on hi haurà l'executable \verb|SuperSopa.exe|. És necessari tenir un compilador que suporti \verb|c++11| sinó el codi no compilarà.
+
+Per executar les diferents versions dels diccionaris i dels programes per solucionar només cal executar \verb|./SuperSopa.exe| i ja apareixerà un menú per escollir les diferents opcions. 
+
+\begin{lstlisting}[frame=single]
+	What do you want to do?
+	0) Exit
+	1) Generate words file
+	2) Generate board file
+	3) Call solver
+\end{lstlisting}
+
+El programa primer necessita que se li generi un arxiu de paraules i un arxiu de tauler, disposa d'aquesta funcionalitat. Per generar aquests arxius escollir les opcions \verb|1| i \verb|2|.
+
+\section{Tests}
+
+S'han fet diversos tests per cada algoritme en funció de \verb|n| (tamany del tauler quadrat), \verb|k| (nombre de paraules del diccionari) i \verb|l| (longitud màxima de les paraules).
+
+\subsection{\texttt{PatronSearch} amb \texttt{TreeDictionary}}
+
+Amb \verb|l = 30|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	 & & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{3}{*}{n} 
+	& 100 & 0.21 & 0.5 & 2.02 \\
+	& 200 & 0.34 & 0.85 & 5.51 \\
+	& 2000 & 0.76 & 0 & 16.1 \\
+\end{tabular}
+
+Amb \verb|l = 5|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	& & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{2}{*}{n} 
+	& 100 & 0.06 & 0.08 & 0.3 \\
+	& 200 & 0.18 & 0.32 & 1.1 \\
+\end{tabular}
+
+\subsection{\texttt{PatronSearch} amb \texttt{HashDictionary}}
+
+Amb \verb|l = 30|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	& & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{3}{*}{n} 
+	& 100 & 2.31 & 5.18 & 70.2 \\
+	& 200 & 7.84 & 18 & 129.8 \\
+	& 2000 & 3.7 & 942.5 & 7600 \\
+\end{tabular}
+
+Amb \verb|l = 5|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	& & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{2}{*}{n} 
+	& 100 & 136.6 & 5.84 & 700 \\
+	& 200 & 431.2 & 607.16 & 947.3 \\
+\end{tabular}
+
+\subsection{\texttt{PatronSearch} amb \texttt{LinearDictionary}}
+
+Amb \verb|l = 30|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	& & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{3}{*}{n} 
+	& 100 & 2.42 & 4.7 & 32.81 \\
+	& 200 & 8.55 & 18.58 & 97.33 \\
+	& 2000 & 7.3 & 916.6 & $\infty$ \\
+\end{tabular}
+
+Amb \verb|l = 5|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	& & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{2}{*}{n} 
+	& 100 & 171.2 & 531.8 & 720 \\
+	& 200 & 450 & 627.2 & 970.4 \\
+\end{tabular}
+
+\subsection{\texttt{WordSearch}}
+
+Amb \verb|l = 30|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	& & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{3}{*}{n} 
+	& 100 & 0.3 & 0.49 & 2.1 \\
+	& 200 & 0.9 & 1.65 & 7.87 \\
+	& 2000 & 78 & 266.5 & 821 \\
+\end{tabular}
+
+Amb \verb|l = 5|
+Unitats en s
+
+\begin{tabular}{cl||c|c|c}
+	\multicolumn{2}{c}{ } & \multicolumn{3}{c}{k} \\
+	& & 1000 & 2000 & 10000 \\
+	\cline{2-5}
+	\multirow{2}{*}{n} 
+	& 100 & 0.6 & 1.2 & 6.09 \\
+	& 200 & 1.7 & 3.4 & 17.5 \\
+\end{tabular}
 
 \end{document}
